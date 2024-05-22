@@ -6,6 +6,7 @@ function App() {
   const [randomNumber, setRandomNumber] = useState(generateRandomNumber());
   const [answer, setAnswer] = useState('');
   const [logs, setLogs] = useState([]);
+  const [isCorrect, setIsCorrect] = useState(false);
   
   useEffect(() => {
     console.log(randomNumber)
@@ -46,6 +47,7 @@ function App() {
 
     if(strike === 4) {
       alert('정답입니다.');
+      setIsCorrect(true);
       setLogs([...logs, `${answer} (축하합니다. 정답입니다.)`]);
       return;
     }
@@ -56,7 +58,7 @@ function App() {
   return (
     <div className="App">
       <h1>숫자 야구 게임</h1>
-      <header>----</header>
+      <header>{isCorrect ? answer : '----' }</header>
       <section>
         <input type="text" value={answer} onChange={handleAnswerChanged}/>
         <button onClick={handleSubmit}>맞춰보기</button>
