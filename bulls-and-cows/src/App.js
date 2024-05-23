@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import { generateRandomNumber } from './random';
+import Logs from './Logs';
 
 function App() {
   const [randomNumber, setRandomNumber] = useState(generateRandomNumber());
@@ -100,16 +101,9 @@ function App() {
           )
         }
       </section>
-      <h2>기록</h2>
-      <ol>
-        {
-          logs.map((log, index) => {
-            return (
-              <li key={`${log}_${index}`}>{log}</li>
-            )
-          })
-        }
-      </ol>
+      {
+        <Logs logs={logs} />
+      }
     </div>
   );
 }
