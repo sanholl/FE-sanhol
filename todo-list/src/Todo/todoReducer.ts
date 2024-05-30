@@ -4,12 +4,12 @@ export type TodoType = {
   isChecked: boolean
 }
 
-type TodoStateType = {
+export type TodoStateType = {
   todos: TodoType[]
 }
 
 // add, remove, checked, allChecked, allRemove
-type TodoActionType = {
+export type TodoActionType = {
   type: 'add'
   payload: {
     text: string
