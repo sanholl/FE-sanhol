@@ -35,3 +35,8 @@
     color: red;
     visibility: hidden;
 }
+
+.lineThrough {
+    text-decoration: line-through;
+    color: #c0c0c0;
+}
