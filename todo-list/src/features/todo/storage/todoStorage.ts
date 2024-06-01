@@ -1,4 +1,4 @@
-import { TodoType } from "./todoReducer";
+import { TodoType } from "../../../shared/types";
 
 export const saveTodos = (todos:TodoType[]) => {
   localStorage.setItem('todos', JSON.stringify(todos));

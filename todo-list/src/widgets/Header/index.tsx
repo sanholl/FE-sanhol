@@ -1,8 +1,8 @@
 
-import { useTodoState } from '../Todo/TodoProvider';
+import { useTodoState } from '../../features/todo/context/TodoProvider';
 import styles from './TodoHeader.module.css';
 
-const TodoHeader = () => {
+export const TodoHeader = () => {
     const todoState = useTodoState()
     const count = todoState.todos.filter((todo) => !todo.isChecked).length;
 
@@ -14,6 +14,4 @@ const TodoHeader = () => {
             </h1>
         </header>
     )
-}
-
-export default TodoHeader;
+};

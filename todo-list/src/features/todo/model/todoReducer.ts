@@ -1,10 +1,5 @@
-import { saveTodos } from "./todoStorage"
-
-export type TodoType = {
-  id: number
-  text: string
-  isChecked: boolean
-}
+import { TodoType } from "../../../shared/types"
+import { saveTodos } from "../storage/todoStorage"
 
 export type TodoStateType = {
   todos: TodoType[]

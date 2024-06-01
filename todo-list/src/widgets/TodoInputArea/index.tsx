@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { useTodoState } from "../Todo/TodoProvider";
+import { useTodoState } from "../../features/todo/context/TodoProvider";
 
 // HOC : High Order Component
 
@@ -7,7 +7,7 @@ interface TodoListAreaProps {
   children:ReactNode
 }
 
-const TodoListArea = (props:TodoListAreaProps) => {
+export const TodoListArea = (props:TodoListAreaProps) => {
   const todoState = useTodoState();
 
   if(todoState.todos.length < 1) {
@@ -19,6 +19,4 @@ const TodoListArea = (props:TodoListAreaProps) => {
       {props.children}
     </>
   )
-}
-
-export default TodoListArea;
+};

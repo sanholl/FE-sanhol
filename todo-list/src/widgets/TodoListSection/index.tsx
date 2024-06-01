@@ -1,9 +1,9 @@
-import TodoItem from "../ListItem/TodoItem";
+import { TodoItem } from "../../entities/ui";
 import styles from "./TodoList.module.css";
-import { useTodoState } from "../Todo/TodoProvider";
+import { useTodoState } from "../../features/todo/context/TodoProvider";
 
 
-const TodoList = () => {
+export const TodoList = () => {
   const todoState = useTodoState();
 
   return (
@@ -23,5 +23,3 @@ const TodoList = () => {
     </section>
   );
 };
-
-export default TodoList;
