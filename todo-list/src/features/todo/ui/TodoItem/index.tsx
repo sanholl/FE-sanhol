@@ -1,7 +1,7 @@
 import styles from "./TodoItem.module.css";
 import { BsCheckCircle } from "react-icons/bs";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
-import { useTodoDispatch } from "../Todo/TodoProvider";
+import { useTodoDispatch } from "../../context/TodoProvider";
 
 interface TodoItemProps {
   id: number;
@@ -9,7 +9,7 @@ interface TodoItemProps {
   isChecked: boolean;
 }
 
-const TodoItem = (props: TodoItemProps) => {
+export const TodoItem = (props: TodoItemProps) => {
   const todoDispatch = useTodoDispatch();
 
   const handleToggleClick = () => {
@@ -47,5 +47,3 @@ const TodoItem = (props: TodoItemProps) => {
     </li>
   );
 };
-
-export default TodoItem;

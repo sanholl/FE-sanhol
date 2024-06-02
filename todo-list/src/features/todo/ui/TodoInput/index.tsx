@@ -1,33 +1,12 @@
 import { RiChatNewLine } from "react-icons/ri";
 import styles from "./TodoInput.module.css";
 import { ChangeEvent, FormEvent } from "react";
-import { useInputTodoDispatch, useInputTodoState, useTodoDispatch } from "../Todo/TodoProvider";
+import { useInputTodoDispatch, useInputTodoState, useTodoDispatch } from "../../context/TodoProvider";
 
-const TodoInput = () => {
+export const TodoInput = () => {
   const todoDispatch = useTodoDispatch();
   const inputDispatch = useInputTodoDispatch();
   const inputState = useInputTodoState();
-  /* const handleTextChange = (text: string) => {
-    inputDispatch({
-      type: 'change',
-      payload: text
-    })
-  };
-
-  const handleSubmit = () => {
-    if(!inputState.text) return;
-
-    todoDispatch({
-      type: 'add',
-      payload: {
-        text: inputState.text
-      }
-    })
-
-    inputDispatch({
-      type: 'clear'
-    })
-  }; */
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     inputDispatch({
@@ -75,5 +54,3 @@ const TodoInput = () => {
     </section>
   );
 };
-
-export default TodoInput;

@@ -2,10 +2,10 @@ import styles from "./TodoListTools.module.css";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { CgRadioCheck } from "react-icons/cg";
-import { useTodoDispatch, useTodoState } from "../Todo/TodoProvider";
+import { useTodoDispatch, useTodoState } from "../../context/TodoProvider";
 
 
-const TodoListTools = () => {
+export const TodoListTools = () => {
   const todoState = useTodoState();
   const todoDispatch = useTodoDispatch();
 
@@ -51,5 +51,3 @@ const TodoListTools = () => {
     </section>
   );
 };
-
-export default TodoListTools;
