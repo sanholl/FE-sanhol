@@ -1,4 +1,4 @@
-import { TodoItem } from "../../entities/ui";
+import { TodoItem } from "../../features/todo/ui";
 import styles from "./TodoList.module.css";
 import { useTodoState } from "../../features/todo/context/TodoProvider";
 
