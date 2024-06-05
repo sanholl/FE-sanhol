@@ -1,4 +1,4 @@
-import { TodoType } from "../../../shared/types";
+import { TodoType } from "../../../../entities/todo/model";
 
 export const saveTodos = (todos:TodoType[]) => {
   localStorage.setItem('todos', JSON.stringify(todos));

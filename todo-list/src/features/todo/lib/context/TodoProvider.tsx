@@ -1,6 +1,6 @@
 import { Dispatch, ReactNode, createContext, useContext, useReducer } from "react";
-import { TodoInputActionType, TodoInputStateType, todoInputReducer } from "../model/todoInputReducer";
-import { TodoActionType, TodoStateType, todoReducer } from "../model/todoReducer";
+import { TodoInputActionType, TodoInputStateType, todoInputReducer } from "../../model/todoInputReducer";
+import { TodoActionType, TodoStateType, todoReducer } from "../../model/todoReducer";
 import { loadTodos } from "../storage/todoStorage";
 
 interface TodoProviderProps {
