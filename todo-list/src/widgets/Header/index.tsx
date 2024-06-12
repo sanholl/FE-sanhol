@@ -1,5 +1,5 @@
 
-import { useTodoState } from '../../features/todo/context/TodoProvider';
+import { useTodoState } from '../../features/todo/lib/context/TodoProvider';
 import styles from './TodoHeader.module.css';
 
 export const TodoHeader = () => {

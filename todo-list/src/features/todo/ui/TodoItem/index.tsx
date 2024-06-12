@@ -1,7 +1,7 @@
 import styles from "./TodoItem.module.css";
 import { BsCheckCircle } from "react-icons/bs";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
-import { useTodoDispatch } from "../../context/TodoProvider";
+import { useTodoDispatch } from "../../lib/context/TodoProvider";
 
 interface TodoItemProps {
   id: number;

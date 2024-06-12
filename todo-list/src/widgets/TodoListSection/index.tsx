@@ -1,6 +1,6 @@
 import { TodoItem } from "../../features/todo/ui";
 import styles from "./TodoList.module.css";
-import { useTodoState } from "../../features/todo/context/TodoProvider";
+import { useTodoState } from "../../features/todo/lib/context/TodoProvider";
 
 
 export const TodoList = () => {
