@@ -1,5 +1,5 @@
-import { TodoType } from "../../../shared/types"
-import { saveTodos } from "../storage/todoStorage"
+import { TodoType } from "../../../entities/todo/model"
+import { saveTodos } from "../lib/storage/todoStorage"
 
 export type TodoStateType = {
   todos: TodoType[]
