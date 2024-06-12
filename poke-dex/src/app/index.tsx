@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
-import PageHeader from "./Common/PageHeader";
-import PageNavigator from "./PageNavigator";
-import { store } from './Store';
+import PageHeader from "../widgets/PageHeader/PageHeader";
+import PageNavigator from "../pages";
+import { store } from '../shared/lib/Store';
 import { Provider } from 'react-redux';
 
 function App() {

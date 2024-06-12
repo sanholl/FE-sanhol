@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import type { PayloadAction } from '@reduxjs/toolkit'
-import { POKEMON_IMAGE_TYPE } from '../Constants'
+import { POKEMON_IMAGE_TYPE } from '../../consts'
 
 export type PokemonImageKeyType = typeof POKEMON_IMAGE_TYPE[keyof typeof POKEMON_IMAGE_TYPE]
 

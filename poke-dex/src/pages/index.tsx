@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import PokeCardList from "./List/PokeCardList";
-import PokemonDetail from "./Detail/PokemonDetail";
+import PokeCardList from "../features/Pokemon/ui/PokeCardList/PokeCardList";
+import PokemonDetail from "../features/Pokemon/ui/PokeDetail/PokemonDetail";
 
 const PageNavigator = () => {
   return (
