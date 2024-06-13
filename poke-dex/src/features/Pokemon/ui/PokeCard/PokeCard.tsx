@@ -1,13 +1,15 @@
 import styled from "@emotion/styled";
-import PokeNameChip from "../Common/PokeNameChip";
-import PokeMarkChip from "../Common/PokeMarkChip";
+import PokeNameChip from "../../../../shared/ui/PokeNameChip/PokeNameChip";
+import PokeMarkChip from "../../../../shared/ui/PokeMarkChip/PokeMarkChip";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { PokemonDetailType, fetchPokemonDetail } from "../Service/pokemonService";
-import { PokeImageSkeletone } from "../Common/PokeImageSkeletone";
+import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/Pokemon/api/pokemonService";
+import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
 import { useSelector } from 'react-redux';
-import { RootState } from "../Store";
+import { RootState, useAppDispatch } from "../../../../entities/pokemon/model/Store";
+import { Body, Footer, Header, Image, Item } from "./PokeCard.styles";
+import { fetchPokemonDetail } from "../../../../entities/pokemon/model/Store/pokemonDetailSlice";
 
 interface PokeCardProps {
   name: string
@@ -15,10 +17,12 @@ interface PokeCardProps {
 
 const PokeCard = (props: PokeCardProps) => {
   let navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const imageType = useSelector((state: RootState) => state.imageType.type);
+  const { pokemonDetails } = useSelector((state: RootState) => state.pokemonDetail);
   const [ref, { entry }] = useIntersectionObserver();
   const isVisible = entry && entry.isIntersecting;
-  const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);
+  const pokemon = pokemonDetails[props.name];
   
   const handleClick = () => {
     navigate(`/pokemon/${props.name}`);
@@ -27,10 +31,7 @@ const PokeCard = (props: PokeCardProps) => {
   useEffect(() => {
     if(!isVisible) return;
     
-    (async () => {
-      const detail = await fetchPokemonDetail(props.name);
-      setPokemon(detail);
-    })()
+    dispatch(fetchPokemonDetail(props.name))
   }, [props.name, isVisible]);
 
   if(!pokemon) {
@@ -63,52 +64,5 @@ const PokeCard = (props: PokeCardProps) => {
     </Item>
   );
 }
-
-const Item = styled.li<{ color: string }>`
-  display: flex;
-  flex-direction: column;
-
-  padding: 8px;
-
-  width: 250px;
-  height: 300px;
-  
-  border: 1px solid #c0c0c0;
-  box-shadow: 1px 1px 3px 1px #c0c0c0;
-
-  cursor: pointer;
-  transition: transform 0.1s ease-in-out;
-
-  &:hover {
-    transform: scale(1.1);
-  }
-
-  &:active {
-    background-color: ${props => props.color};
-    opacity: 0.8;
-    transition: background-color 0s;
-  }
-`;
-const Header = styled.section`
-  display: flex;
-  flex-direction: row;
-  margin: 8px 0;
-`;
-const Body = styled.section`
-  display: flex;
-  flex: 1 1 auto;
-  justify-content: center;
-  align-items: center;
-  margin: 8px 0;
-`;
-const Image = styled.img`
-  width: 180px;
-  height: 180px;
-`;
-const Footer = styled.section`
-  display: flex;
-  flex-direction: row;
-  margin: 8px 0;
-`;
 
 export default PokeCard;
