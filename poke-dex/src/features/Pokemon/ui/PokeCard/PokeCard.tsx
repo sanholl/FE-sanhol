@@ -7,9 +7,9 @@ import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/P
 import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from "../../../../shared/lib/Store";
+import { RootState, useAppDispatch } from "../../../../entities/pokemon/model/Store";
 import { Body, Footer, Header, Image, Item } from "./PokeCard.styles";
-import { fetchPokemonDetail } from "../../../../shared/lib/Store/pokemonDetailSlice";
+import { fetchPokemonDetail } from "../../../../entities/pokemon/model/Store/pokemonDetailSlice";
 
 interface PokeCardProps {
   name: string

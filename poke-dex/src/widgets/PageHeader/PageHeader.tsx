@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { POKEMON_IMAGE_TYPE } from "../../shared/consts/PokemonImageType";
-import { RootState, useAppDispatch } from "../../shared/lib/Store";
+import { RootState, useAppDispatch } from "../../entities/pokemon/model/Store";
 import { ChangeEvent } from "react";
-import { PokemonImageKeyType, changeImageType } from "../../shared/lib/Store/imageTypeSlice";
+import { PokemonImageKeyType, changeImageType } from "../../entities/pokemon/model/Store/imageTypeSlice";
 import { Header, Select, Title } from './PageHeader.styles';
 
 const PageHeader = () => {

@@ -1,7 +1,7 @@
 import { BrowserRouter } from "react-router-dom";
 import PageHeader from "../widgets/PageHeader/PageHeader";
 import PageNavigator from "../pages";
-import { store } from '../shared/lib/Store';
+import { store } from '../entities/pokemon/model/Store';
 import { Provider } from 'react-redux';
 
 function App() {

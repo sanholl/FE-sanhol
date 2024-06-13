@@ -4,9 +4,9 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from "../../../../shared/lib/Store";
+import { RootState, useAppDispatch } from "../../../../entities/pokemon/model/Store";
 import { Body, Container, Divider, Footer, Image, ImageContainer, Table, TableHeader, TableRow } from "./PokemonDetail.styles";
-import { fetchPokemonDetail } from "../../../../shared/lib/Store/pokemonDetailSlice";
+import { fetchPokemonDetail } from "../../../../entities/pokemon/model/Store/pokemonDetailSlice";
 
 const PokemonDetail = () => {
   const { name } = useParams();

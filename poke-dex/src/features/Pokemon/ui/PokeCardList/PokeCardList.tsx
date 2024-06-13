@@ -5,8 +5,8 @@ import { fetchPokemonsAPI } from "../../../../entities/Pokemon/api/pokemonServic
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { List, Loading } from "./PokeCardList.styles";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchPokemons } from "../../../../shared/lib/Store/pokemonSlice";
-import { RootState, useAppDispatch } from "../../../../shared/lib/Store";
+import { fetchPokemons } from "../../../../entities/pokemon/model/Store/pokemonSlice";
+import { RootState, useAppDispatch } from "../../../../entities/pokemon/model/Store";
 
 const PokeCardList = () => {
   const dispatch = useAppDispatch();
