@@ -1,4 +1,4 @@
-import PokeCard from "../PokeCard/PokeCard";
+import PokeCard from "../PokeCard";
 import { useEffect, useState } from "react";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { List, Loading } from "./PokeCardList.styles";

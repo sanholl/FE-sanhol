@@ -1,5 +1,5 @@
-import PokeNameChip from "../../../../shared/ui/PokeNameChip/PokeNameChip";
-import PokeMarkChip from "../../../../shared/ui/PokeMarkChip/PokeMarkChip";
+import PokeNameChip from "../../../../shared/ui/PokeNameChip";
+import PokeMarkChip from "../../../../shared/ui/PokeMarkChip";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
