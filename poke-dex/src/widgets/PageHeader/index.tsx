@@ -2,7 +2,7 @@
 import { Link } from "react-router-dom";
 import { POKEMON_IMAGE_TYPE } from "../../shared/consts/PokemonImageType";
 // import { RootState, useAppDispatch } from "../../entities/pokemon/model/Store";
-import { ChangeEvent } from "react";
+import React, { ChangeEvent } from "react";
 import { Header, Select, Title } from './PageHeader.styles';
 import { PokemonImageKeyType } from '../../features/Pokemon/model/pokemonImageReducer';
 import { useImageDispatch, useImageState } from "../../features/Pokemon/lib/context/useImageContext";
@@ -34,4 +34,4 @@ const PageHeader = () => {
   );
 }
 
-export default PageHeader;
+export default React.memo(PageHeader);

@@ -1,15 +1,14 @@
-import PokeNameChip from "../../../../shared/ui/PokeNameChip";
-import PokeMarkChip from "../../../../shared/ui/PokeMarkChip";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
 import { useSelector } from 'react-redux';
 import { RootState, useAppDispatch } from "../../../../entities/pokemon/model/store";
 import { Body, Footer, Header, Image, Item } from "./PokeCard.styles";
 // import { fetchPokemonDetail } from "../../../../entities/pokemon/model/store/pokemonDetailSlice";
-import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api/pokemonService";
+import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api";
 import { useImageState } from "../../lib/context/useImageContext";
+import { PokeMarkChip, PokeNameChip } from "../../../../shared/ui";
 
 interface PokeCardProps {
   name: string
@@ -72,4 +71,4 @@ const PokeCard = (props: PokeCardProps) => {
   );
 }
 
-export default PokeCard;
+export default React.memo(PokeCard);
