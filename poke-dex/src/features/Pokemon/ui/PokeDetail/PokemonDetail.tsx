@@ -6,13 +6,12 @@ import { useSelector } from 'react-redux';
 import { RootState } from "../../../../entities/pokemon/model/store";
 import { Body, Container, Divider, Footer, Image, ImageContainer, Table, TableHeader, TableRow } from "./PokemonDetail.styles";
 import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api/pokemonService";
-import { useImageType } from "../../lib/context";
+import { useImageState } from "../../lib/context/useImageContext";
 
 const PokemonDetail = () => {
   const { name } = useParams();
-  // const imageType = useSelector((state: RootState) => state.imageType.type);
-  const {state, dispatch} = useImageType();
-  const imageType = state.type;
+  const imageState = useImageState();
+  const imageType = imageState.type;
   const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);
 
   useEffect(() => {

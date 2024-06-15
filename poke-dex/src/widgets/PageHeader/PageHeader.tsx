@@ -4,14 +4,15 @@ import { POKEMON_IMAGE_TYPE } from "../../shared/consts/PokemonImageType";
 // import { RootState, useAppDispatch } from "../../entities/pokemon/model/Store";
 import { ChangeEvent } from "react";
 import { Header, Select, Title } from './PageHeader.styles';
-import { useImageType } from '../../features/Pokemon/lib/context';
 import { PokemonImageKeyType } from '../../features/Pokemon/model/pokemonImageReducer';
+import { useImageDispatch, useImageState } from "../../features/Pokemon/lib/context/useImageContext";
+
 
 const PageHeader = () => {
   // const type = useSelector((state: RootState) => state.imageType.type);
   // const dispatch = useAppDispatch();
-  const {state, dispatch} = useImageType();
-  const type = state.type;
+  const state = useImageState();
+  const dispatch = useImageDispatch();
 
   const handleChange = (e:ChangeEvent<HTMLSelectElement>) => {
     dispatch({
@@ -24,7 +25,7 @@ const PageHeader = () => {
       <Title>
         <Link to="/">Pokémon</Link>
       </Title>
-      <Select value={type} onChange={handleChange}>
+      <Select value={state.type} onChange={handleChange}>
         <option value={POKEMON_IMAGE_TYPE.OFFICIAL_ARTWORK}>Offical</option>
         <option value={POKEMON_IMAGE_TYPE.DREAM_WORLD}>DreamWorld</option>
         <option value={POKEMON_IMAGE_TYPE.FRONT_DEFAULT}>FrontDefault</option>

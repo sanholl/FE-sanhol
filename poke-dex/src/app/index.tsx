@@ -3,7 +3,7 @@ import PageHeader from "../widgets/PageHeader/PageHeader";
 import PageNavigator from "../pages";
 import { store } from '../entities/pokemon/model/store';
 import { Provider } from 'react-redux';
-import { PokemonProvider } from "../features/Pokemon/lib/context";
+import { PokemonProvider } from "./provider/PokemonProvier";
 
 
 function App() {

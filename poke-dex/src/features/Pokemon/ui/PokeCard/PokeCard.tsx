@@ -9,7 +9,7 @@ import { RootState, useAppDispatch } from "../../../../entities/pokemon/model/st
 import { Body, Footer, Header, Image, Item } from "./PokeCard.styles";
 // import { fetchPokemonDetail } from "../../../../entities/pokemon/model/store/pokemonDetailSlice";
 import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api/pokemonService";
-import { useImageType } from "../../lib/context";
+import { useImageState } from "../../lib/context/useImageContext";
 
 interface PokeCardProps {
   name: string
@@ -19,8 +19,8 @@ const PokeCard = (props: PokeCardProps) => {
   let navigate = useNavigate();
   // const dispatch = useAppDispatch();
   // const imageType = useSelector((state: RootState) => state.imageType.type);
-  const {state, dispatch} = useImageType();
-  const imageType = state.type;
+  const imageState = useImageState();
+  const imageType = imageState.type;
   // const { pokemonDetails } = useSelector((state: RootState) => state.pokemonDetail);
   const [ref, { entry }] = useIntersectionObserver();
   const isVisible = entry && entry.isIntersecting;
