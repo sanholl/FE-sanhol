@@ -1,8 +1,8 @@
-import styled from "@emotion/styled";
-import PokeCard from "./PokeCard";
+import PokeCard from "../PokeCard";
 import { useEffect, useState } from "react";
-import { PokemonListResponseType, fetchPokemons } from "../Service/pokemonService";
 import useInfiniteScroll from "react-infinite-scroll-hook";
+import { List, Loading } from "./PokeCardList.styles";
+import { PokemonListResponseType, fetchPokemonsAPI } from "../../../../entities/pokemon/api/pokemonService";
 
 const PokeCardList = () => {
   const [pokemons, setPokemons] = useState<PokemonListResponseType>({
@@ -15,7 +15,7 @@ const PokeCardList = () => {
     loading: false,
     hasNextPage: pokemons.next !== "",
     onLoadMore: async () => {
-      const morePokemons = await fetchPokemons(pokemons.next);
+      const morePokemons = await fetchPokemonsAPI(pokemons.next);
 
       setPokemons({
         ...morePokemons,
@@ -28,7 +28,7 @@ const PokeCardList = () => {
 
   useEffect(() => {
     (async () => {
-      const result = await fetchPokemons();
+      const result = await fetchPokemonsAPI();
       setPokemons(result);
     })();
   }, []);
@@ -51,22 +51,5 @@ const PokeCardList = () => {
     </>
   );
 };
-
-const Loading = styled.div`
-  display: flex;
-  justify-content: center;
-`
-
-const List = styled.ul`
-  list-style: none;
-  padding: 0;
-  margin: 0 0 32px 0;
-
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-`;
 
 export default PokeCardList;
