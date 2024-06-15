@@ -1,19 +1,22 @@
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 import { POKEMON_IMAGE_TYPE } from "../../shared/consts/PokemonImageType";
-import { RootState, useAppDispatch } from "../../entities/pokemon/model/Store";
+// import { RootState, useAppDispatch } from "../../entities/pokemon/model/Store";
 import { ChangeEvent } from "react";
-import { PokemonImageKeyType, changeImageType } from "../../entities/pokemon/model/Store/imageTypeSlice";
 import { Header, Select, Title } from './PageHeader.styles';
+import { useImageType } from '../../features/Pokemon/lib/context';
+import { PokemonImageKeyType } from '../../features/Pokemon/model/pokemonImageReducer';
 
 const PageHeader = () => {
-  const type = useSelector((state: RootState) => state.imageType.type);
-  const dispatch = useAppDispatch();
+  // const type = useSelector((state: RootState) => state.imageType.type);
+  // const dispatch = useAppDispatch();
+  const {state, dispatch} = useImageType();
+  const type = state.type;
 
   const handleChange = (e:ChangeEvent<HTMLSelectElement>) => {
-    dispatch(changeImageType({
-      type: e.target.value as PokemonImageKeyType
-    }))
+    dispatch({
+      type: 'imageType', payload: e.target.value as PokemonImageKeyType
+    })
   }
   
   return (

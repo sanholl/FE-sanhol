@@ -1,29 +1,36 @@
-import styled from "@emotion/styled";
 import PokeCard from "../PokeCard/PokeCard";
 import { useEffect, useState } from "react";
-import { fetchPokemonsAPI } from "../../../../entities/Pokemon/api/pokemonService";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { List, Loading } from "./PokeCardList.styles";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchPokemons } from "../../../../entities/pokemon/model/Store/pokemonSlice";
-import { RootState, useAppDispatch } from "../../../../entities/pokemon/model/Store";
+import { PokemonListResponseType, fetchPokemonsAPI } from "../../../../entities/pokemon/api/pokemonService";
 
 const PokeCardList = () => {
-  const dispatch = useAppDispatch();
-  const { pokemons } = useSelector((state: RootState) => state.pokemons);
+  const [pokemons, setPokemons] = useState<PokemonListResponseType>({
+    count: 0,
+    next: "",
+    results: [],
+  });
 
   const [infiniteref] = useInfiniteScroll({
     loading: false,
     hasNextPage: pokemons.next !== "",
     onLoadMore: async () => {
-      dispatch(fetchPokemons(pokemons.next));
+      const morePokemons = await fetchPokemonsAPI(pokemons.next);
+
+      setPokemons({
+        ...morePokemons,
+        results: [...pokemons.results, ...morePokemons.results]
+      })
     },
     disabled: false,
     rootMargin: "0px 0px 400px 0px",
   });
 
   useEffect(() => {
-    dispatch(fetchPokemons());
+    (async () => {
+      const result = await fetchPokemonsAPI();
+      setPokemons(result);
+    })();
   }, []);
 
   return (

@@ -1,15 +1,15 @@
-import styled from "@emotion/styled";
 import PokeNameChip from "../../../../shared/ui/PokeNameChip/PokeNameChip";
 import PokeMarkChip from "../../../../shared/ui/PokeMarkChip/PokeMarkChip";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/Pokemon/api/pokemonService";
 import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from "../../../../entities/pokemon/model/Store";
+import { RootState, useAppDispatch } from "../../../../entities/pokemon/model/store";
 import { Body, Footer, Header, Image, Item } from "./PokeCard.styles";
-import { fetchPokemonDetail } from "../../../../entities/pokemon/model/Store/pokemonDetailSlice";
+// import { fetchPokemonDetail } from "../../../../entities/pokemon/model/store/pokemonDetailSlice";
+import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api/pokemonService";
+import { useImageType } from "../../lib/context";
 
 interface PokeCardProps {
   name: string
@@ -17,12 +17,15 @@ interface PokeCardProps {
 
 const PokeCard = (props: PokeCardProps) => {
   let navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const imageType = useSelector((state: RootState) => state.imageType.type);
-  const { pokemonDetails } = useSelector((state: RootState) => state.pokemonDetail);
+  // const dispatch = useAppDispatch();
+  // const imageType = useSelector((state: RootState) => state.imageType.type);
+  const {state, dispatch} = useImageType();
+  const imageType = state.type;
+  // const { pokemonDetails } = useSelector((state: RootState) => state.pokemonDetail);
   const [ref, { entry }] = useIntersectionObserver();
   const isVisible = entry && entry.isIntersecting;
-  const pokemon = pokemonDetails[props.name];
+  const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);
+  // const pokemon = pokemonDetails[props.name];
   
   const handleClick = () => {
     navigate(`/pokemon/${props.name}`);
@@ -31,7 +34,11 @@ const PokeCard = (props: PokeCardProps) => {
   useEffect(() => {
     if(!isVisible) return;
     
-    dispatch(fetchPokemonDetail(props.name))
+    // dispatch(fetchPokemonDetail(props.name))
+    (async () => {
+      const detail = await fetchPokemonDetailAPI(props.name);
+      setPokemon(detail);
+    })()
   }, [props.name, isVisible]);
 
   if(!pokemon) {

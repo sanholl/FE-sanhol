@@ -1,18 +1,22 @@
 import { BrowserRouter } from "react-router-dom";
 import PageHeader from "../widgets/PageHeader/PageHeader";
 import PageNavigator from "../pages";
-import { store } from '../entities/pokemon/model/Store';
+import { store } from '../entities/pokemon/model/store';
 import { Provider } from 'react-redux';
+import { PokemonProvider } from "../features/Pokemon/lib/context";
+
 
 function App() {
   return (
     <>
-      <Provider store={store}>
+      {/* <Provider store={store}> */}
+      <PokemonProvider>
         <BrowserRouter>
           <PageHeader />
           <PageNavigator />
         </BrowserRouter>
-      </Provider>
+      </PokemonProvider>
+      {/* </Provider> */}
     </>
   );
 }
