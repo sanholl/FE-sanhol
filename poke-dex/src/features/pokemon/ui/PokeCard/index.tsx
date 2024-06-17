@@ -8,7 +8,7 @@ import { useImageState } from "../../lib/context/useImageContext";
 import { PokeMarkChip, PokeNameChip } from "../../../../shared/ui";
 import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api";
 import { Body, Footer, Header, Image, Item } from "./PokeCard.styles";
-import PokeImage from "../PokeImage";
+import PokeImage from "../../../../widgets/PokeImage";
 
 interface PokeCardProps {
   name: string

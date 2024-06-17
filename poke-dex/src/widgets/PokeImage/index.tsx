@@ -1,6 +1,6 @@
 import React from "react";
-import { PokemonDetailType } from "../../../../entities/pokemon/api";
-import { useImageState } from "../../lib/context/useImageContext";
+import { PokemonDetailType } from "../../entities/pokemon/api";
+import { useImageState } from "../../features/pokemon/lib/context/useImageContext";
 import { Image } from "./PokeImage.styles";
 
 interface PokeImageProps {
