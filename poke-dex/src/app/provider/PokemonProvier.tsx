@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, ReactNode, useReducer } from "react";
-import { pokemonImageReducer } from "../../features/Pokemon/model/pokemonImageReducer";
+import { pokemonImageReducer } from "../../features/pokemon/model/pokemonImageReducer";
 import { POKEMON_IMAGE_TYPE } from "../../shared/consts";
-import { PokemonImageActionContext, PokemonImageStateContext } from "../../features/Pokemon/lib/context/useImageContext";
+import { PokemonImageActionContext, PokemonImageStateContext } from "../../features/pokemon/lib/context/useImageContext";
 
 interface PokemonProviderProps {
   children: ReactNode;
