@@ -2,7 +2,7 @@ import PokeCard from "../PokeCard";
 import { useEffect, useState } from "react";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { List, Loading } from "./PokeCardList.styles";
-import { PokemonListResponseType, fetchPokemonsAPI } from "../../../../entities/Pokemon/api";
+import { PokemonListResponseType, fetchPokemonsAPI } from "../../../../entities/pokemon/api";
 
 const PokeCardList = () => {
   const [pokemons, setPokemons] = useState<PokemonListResponseType>({

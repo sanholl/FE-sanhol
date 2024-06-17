@@ -5,7 +5,7 @@ import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
 // import { useSelector } from 'react-redux';
 // import { RootState } from "../../../../entities/pokemon/model/store";
 import { Body, Container, Divider, Footer, Image, ImageContainer, Table, TableHeader, TableRow } from "./PokemonDetail.styles";
-import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/Pokemon/api";
+import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api";
 import { useImageState } from "../../lib/context/useImageContext";
 import { PokeMarkChip } from "../../../../shared/ui";
 

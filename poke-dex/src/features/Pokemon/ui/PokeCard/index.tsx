@@ -3,12 +3,12 @@ import React, { useEffect, useState } from "react";
 import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
 import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from "../../../../entities/Pokemon/model/Store";
+import { RootState, useAppDispatch } from "../../../../entities/pokemon/model/store";
 
 // import { fetchPokemonDetail } from "../../../../entities/pokemon/model/store/pokemonDetailSlice";
 import { useImageState } from "../../lib/context/useImageContext";
 import { PokeMarkChip, PokeNameChip } from "../../../../shared/ui";
-import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/Pokemon/api";
+import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api";
 import { Body, Footer, Header, Image, Item } from "./PokeCard.styles";
 
 interface PokeCardProps {

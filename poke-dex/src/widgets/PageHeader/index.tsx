@@ -4,8 +4,8 @@ import { POKEMON_IMAGE_TYPE } from "../../shared/consts/PokemonImageType";
 // import { RootState, useAppDispatch } from "../../entities/pokemon/model/Store";
 import React, { ChangeEvent } from "react";
 import { Header, Select, Title } from './PageHeader.styles';
-import { PokemonImageKeyType } from '../../features/Pokemon/model/pokemonImageReducer';
-import { useImageDispatch, useImageState } from "../../features/Pokemon/lib/context/useImageContext";
+import { PokemonImageKeyType } from '../../features/pokemon/model/pokemonImageReducer';
+import { useImageDispatch, useImageState } from "../../features/pokemon/lib/context/useImageContext";
 
 
 const PageHeader = () => {
