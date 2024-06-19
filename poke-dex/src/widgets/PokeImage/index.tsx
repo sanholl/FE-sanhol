@@ -1,6 +1,6 @@
 import React from "react";
 import { PokemonDetailType } from "../../entities/pokemon/api";
-import { useImageState } from "../../features/pokemon/lib/context/useImageContext";
+import { useImageState, useImageType } from "../../features/pokemon/lib/context/useImageContext";
 import { Image } from "./PokeImage.styles";
 
 interface PokeImageProps {
@@ -8,7 +8,8 @@ interface PokeImageProps {
 }
 
 const PokeImage = (props: PokeImageProps) => {
-  const imageState = useImageState();
+  // const imageState = useImageState();
+  const imageState = useImageType().state;
   const imageType = imageState.type;
 
   return (

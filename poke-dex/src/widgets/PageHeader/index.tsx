@@ -5,14 +5,16 @@ import { POKEMON_IMAGE_TYPE } from "../../shared/consts/PokemonImageType";
 import React, { ChangeEvent } from "react";
 import { Header, Select, Title } from './PageHeader.styles';
 import { PokemonImageKeyType } from '../../features/pokemon/model/pokemonImageReducer';
-import { useImageDispatch, useImageState } from "../../features/pokemon/lib/context/useImageContext";
+import { useImageDispatch, useImageState, useImageType } from "../../features/pokemon/lib/context/useImageContext";
 
 
 const PageHeader = () => {
   // const type = useSelector((state: RootState) => state.imageType.type);
   // const dispatch = useAppDispatch();
-  const state = useImageState();
-  const dispatch = useImageDispatch();
+  // const state = useImageState();
+  // const dispatch = useImageDispatch();
+  const state = useImageType().state;
+  const dispatch = useImageType().dispatch;
 
   const handleChange = (e:ChangeEvent<HTMLSelectElement>) => {
     dispatch({
