@@ -1,9 +1,10 @@
 import { fetchPokemonsAPI } from "../../../entities/pokemon/api";
-import { useCombinedContext } from "../lib/context/usePokemonsContext";
+import { useCombinedContext, usePokemonsDispatch } from "../lib/context/usePokemonsContext";
 
 
 export const useFetchPokemons = () => {
-  const { pokemonsDispatch } = useCombinedContext();
+  // const { pokemonsDispatch } = useCombinedContext();
+  const pokemonsDispatch = usePokemonsDispatch();
 
   const fetchPokemons = async (nextUrl?: string) => {
     pokemonsDispatch({ type: 'FETCH_POKEMONS_REQUEST' });
