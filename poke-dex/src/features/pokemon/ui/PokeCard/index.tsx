@@ -13,8 +13,6 @@ interface PokeCardProps {
 
 const PokeCard = (props: PokeCardProps) => {
   let navigate = useNavigate();
-  // const imageState = useImageState();
-  // const imageType = imageState.type;
   const [ref, { entry }] = useIntersectionObserver();
   const isVisible = entry && entry.isIntersecting;
   const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);

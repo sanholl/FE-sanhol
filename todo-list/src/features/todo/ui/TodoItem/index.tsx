@@ -1,6 +1,7 @@
 import styles from "./TodoItem.module.css";
 import { BsCheckCircle } from "react-icons/bs";
 import { IoIosRemoveCircleOutline } from "react-icons/io";
+// import { useCombinedContext } from "../../lib/context";
 import { useTodoDispatch } from "../../lib/context/TodoProvider";
 
 interface TodoItemProps {
@@ -11,6 +12,7 @@ interface TodoItemProps {
 
 export const TodoItem = (props: TodoItemProps) => {
   const todoDispatch = useTodoDispatch();
+  // const {todoDispatch} = useCombinedContext();
 
   const handleToggleClick = () => {
     todoDispatch({

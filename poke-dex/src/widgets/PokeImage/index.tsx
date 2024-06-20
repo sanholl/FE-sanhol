@@ -1,15 +1,14 @@
 import React from "react";
 import { PokemonDetailType } from "../../entities/pokemon/api";
-import { useImageState, useImageType } from "../../features/pokemon/lib/context/useImageContext";
 import { Image } from "./PokeImage.styles";
+import { useCombinedContext } from "../../features/pokemon/lib/context/usePokemonsContext";
 
 interface PokeImageProps {
   pokemon: PokemonDetailType
 }
 
 const PokeImage = (props: PokeImageProps) => {
-  // const imageState = useImageState();
-  const imageState = useImageType().state;
+  const {imageState} = useCombinedContext();
   const imageType = imageState.type;
 
   return (
@@ -17,4 +16,5 @@ const PokeImage = (props: PokeImageProps) => {
   );
 }
 
-export default React.memo(PokeImage);
+// export default React.memo(PokeImage);
+export default PokeImage;

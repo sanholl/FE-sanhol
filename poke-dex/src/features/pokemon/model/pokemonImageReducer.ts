@@ -22,9 +22,9 @@ const initialState: ImageTypeState = {
 export const pokemonImageReducer = (state: ImageTypeState = initialState, action: ImageTypeAction) => {
   switch (action.type) {
     case 'imageType':
-    return {
-      type: action.payload
-    }
+      return {
+        type: action.payload
+      }
 
     default:
       return state

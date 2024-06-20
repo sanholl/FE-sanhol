@@ -1,19 +1,31 @@
 import { FC, PropsWithChildren, ReactNode, useReducer } from "react";
 import { pokemonImageReducer } from "../../features/pokemon/model/pokemonImageReducer";
 import { POKEMON_IMAGE_TYPE } from "../../shared/consts";
-import { PokemonImageActionContext, PokemonImageStateContext, PokemonImageContext } from "../../features/pokemon/lib/context/useImageContext";
+import { PokemonContext } from "../../features/pokemon/lib/context/usePokemonsContext";
+import { PokemonsState, pokemonsReducer } from "../../features/pokemon/model/pokemonReducer";
 
 interface PokemonProviderProps {
   children: ReactNode;
 }
 
+const initialState: PokemonsState = {
+  pokemons: {
+    count: 0,
+    next: '',
+    results: []
+  },
+  loading: false,
+  error: null
+}
+
 export const PokemonProvider: FC<PropsWithChildren<PokemonProviderProps>> = ({children}) => {
-  const [state, dispatch] = useReducer(pokemonImageReducer, {type: POKEMON_IMAGE_TYPE.FRONT_DEFAULT});
+  const [imageState, imageDispatch] = useReducer(pokemonImageReducer, {type: POKEMON_IMAGE_TYPE.FRONT_DEFAULT});
+  const [pokemonsState, pokemonsDispatch] = useReducer(pokemonsReducer, initialState);
 
   return (
-    <PokemonImageContext.Provider value={{state, dispatch}}>
+    <PokemonContext.Provider value={{imageState, imageDispatch, pokemonsState, pokemonsDispatch}}>
       {children}
-    </PokemonImageContext.Provider>
+    </PokemonContext.Provider>
   );
 }
 // export const PokemonProvider: FC<PropsWithChildren<PokemonProviderProps>> = ({children}) => {

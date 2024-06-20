@@ -6,13 +6,14 @@ import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
 // import { RootState } from "../../../../entities/pokemon/model/store";
 import { Body, Container, Divider, Footer, Image, ImageContainer, Table, TableHeader, TableRow } from "./PokemonDetail.styles";
 import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api";
-import { useImageState, useImageType } from "../../lib/context/useImageContext";
 import { PokeMarkChip } from "../../../../shared/ui";
+import { useCombinedContext } from "../../lib/context/usePokemonsContext";
 
 const PokemonDetail = () => {
   const { name } = useParams();
   // const imageState = useImageState();
-  const imageState = useImageType().state;
+  // const imageState = useImageType().state;
+  const {imageState} = useCombinedContext();
   const imageType = imageState.type;
   const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);
 
@@ -93,4 +94,5 @@ const PokemonDetail = () => {
   );
 }
 
-export default React.memo(PokemonDetail);
+// export default React.memo(PokemonDetail);
+export default PokemonDetail;

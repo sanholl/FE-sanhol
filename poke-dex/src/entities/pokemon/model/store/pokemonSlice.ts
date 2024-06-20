@@ -24,9 +24,7 @@ const initialState = {
 const pokemonsSlice = createSlice({
   name: 'pokemons',
   initialState,
-  reducers: {
-    
-  },
+  reducers: {},
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(fetchPokemons.fulfilled, (state, action:PayloadAction<PokemonListResponseType>) => {
