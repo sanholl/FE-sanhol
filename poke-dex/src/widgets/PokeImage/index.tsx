@@ -17,5 +17,5 @@ const PokeImage = (props: PokeImageProps) => {
   );
 }
 
-// export default React.memo(PokeImage);
-export default PokeImage;
+export default React.memo(PokeImage);
+// export default PokeImage;

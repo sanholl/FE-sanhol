@@ -2,8 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
-// import { useSelector } from 'react-redux';
-// import { RootState } from "../../../../entities/pokemon/model/store";
 import { Body, Container, Divider, Footer, Image, ImageContainer, Table, TableHeader, TableRow } from "./PokemonDetail.styles";
 import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api";
 import { PokeMarkChip } from "../../../../shared/ui";
@@ -93,5 +91,5 @@ const PokemonDetail = () => {
   );
 }
 
-// export default React.memo(PokemonDetail);
-export default PokemonDetail;
+export default React.memo(PokemonDetail);
+// export default PokemonDetail;

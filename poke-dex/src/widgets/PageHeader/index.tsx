@@ -31,5 +31,5 @@ const PageHeader = () => {
   );
 }
 
-// export default React.memo(PageHeader);
-export default PageHeader;
+export default React.memo(PageHeader);
+// export default PageHeader;

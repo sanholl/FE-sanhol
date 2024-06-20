@@ -1,5 +1,5 @@
 import PokeCard from "../PokeCard";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { List, Loading } from "./PokeCardList.styles";
 import { useCombinedContext, usePokemonsState } from "../../lib/context/usePokemonsContext";
@@ -44,4 +44,5 @@ const PokeCardList = () => {
   );
 };
 
-export default PokeCardList;
+export default React.memo(PokeCardList);
+// export default PokeCardList;
