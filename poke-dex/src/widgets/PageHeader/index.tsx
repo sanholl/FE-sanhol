@@ -3,11 +3,13 @@ import { POKEMON_IMAGE_TYPE } from "../../shared/consts/PokemonImageType";
 import React, { ChangeEvent } from "react";
 import { Header, Select, Title } from './PageHeader.styles';
 import { PokemonImageKeyType } from '../../features/pokemon/model/pokemonImageReducer';
-import { useCombinedContext } from "../../features/pokemon/lib/context/usePokemonsContext";
+import { useCombinedContext, useImageDispatch, useImageState } from "../../features/pokemon/lib/context/usePokemonsContext";
 
 
 const PageHeader = () => {
-  const {imageState, imageDispatch} = useCombinedContext();
+  const imageState = useImageState();
+  const imageDispatch = useImageDispatch();
+  // const {imageState, imageDispatch} = useCombinedContext();
 
   const handleChange = (e:ChangeEvent<HTMLSelectElement>) => {
     imageDispatch({
