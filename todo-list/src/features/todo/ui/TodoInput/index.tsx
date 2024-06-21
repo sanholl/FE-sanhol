@@ -1,12 +1,14 @@
 import { RiChatNewLine } from "react-icons/ri";
 import styles from "./TodoInput.module.css";
 import { ChangeEvent, FormEvent } from "react";
+// import { useCombinedContext } from "../../lib/context";
 import { useInputTodoDispatch, useInputTodoState, useTodoDispatch } from "../../lib/context/TodoProvider";
 
 export const TodoInput = () => {
   const todoDispatch = useTodoDispatch();
   const inputDispatch = useInputTodoDispatch();
   const inputState = useInputTodoState();
+  // const {todoDispatch, inputDispatch, inputState} = useCombinedContext();
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     inputDispatch({

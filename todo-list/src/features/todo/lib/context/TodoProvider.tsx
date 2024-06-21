@@ -7,6 +7,36 @@ interface TodoProviderProps {
   children: ReactNode;
 }
 
+//ANCHOR - 최적화 전
+interface CombinedState {
+  todoState: TodoStateType;
+  todoDispatch: Dispatch<TodoActionType>;
+  inputState: TodoInputStateType;
+  inputDispatch: Dispatch<TodoInputActionType>;
+}
+
+const CombinedContext = createContext<CombinedState | null>(null);
+
+// export const TodoProvider: FC<PropsWithChildren<TodoProviderProps>> = ({ children }) => {
+//   const [todoState, todoDispatch] = useReducer(todoReducer, { todos: loadTodos() });
+//   const [inputState, inputDispatch] = useReducer(todoInputReducer, { text: "" });
+
+//   return (
+//     <CombinedContext.Provider value={{todoState, todoDispatch, inputState, inputDispatch}}>
+//       {children}
+//     </CombinedContext.Provider>
+//   );
+// };
+
+// export const useCombinedContext = () => {
+//   const context = useContext(CombinedContext);
+//   if (!context) {
+//     throw new Error('Cannot find CombinedContext');
+//   }
+//   return context;
+// };
+
+//ANCHOR - 최적화 후
 const TodoStateContext = createContext<TodoStateType | null>(null);
 const TodoDispatchContext = createContext<Dispatch<TodoActionType> | null>(null);
 const InputTodoContext = createContext<TodoInputStateType | null>(null);

@@ -2,12 +2,14 @@ import styles from "./TodoListTools.module.css";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { MdDelete } from "react-icons/md";
 import { CgRadioCheck } from "react-icons/cg";
+// import { useCombinedContext } from "../../lib/context";
 import { useTodoDispatch, useTodoState } from "../../lib/context/TodoProvider";
 
 
 export const TodoListTools = () => {
   const todoState = useTodoState();
   const todoDispatch = useTodoDispatch();
+  // const {todoState, todoDispatch} = useCombinedContext();
 
   const isTodoAllChecked = () => {
     return todoState.todos.every(todo => todo.isChecked);

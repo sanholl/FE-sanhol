@@ -1,6 +1,6 @@
 import { PayloadAction, createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { PokemonDetailType, fetchPokemonDetailAPI } from '../../api/pokemonService'
 import { RootState } from '.'
+import { PokemonDetailType, fetchPokemonDetailAPI } from '../../api'
 
 export const fetchPokemonDetail = createAsyncThunk(
   'users/fetchPokemonDetail',
