@@ -1,5 +1,5 @@
 import { fetchPokemonsAPI } from "../../../entities/pokemon/api";
-import { useCombinedContext, usePokemonsDispatch } from "../lib/context/usePokemonsContext";
+import { useCombinedContext, usePokemonsDispatch } from "../../../entities/pokemon/lib/context/usePokemonsContext";
 
 
 export const useFetchPokemons = () => {

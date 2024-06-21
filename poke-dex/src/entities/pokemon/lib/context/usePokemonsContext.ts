@@ -1,6 +1,6 @@
 import { createContext, useContext, Dispatch } from 'react';
-import { ChangeImageTypeAction, ImageTypeState } from '../../model/pokemonImageReducer';
-import { ChangePokemonsAction, PokemonsState } from '../../model/pokemonReducer';
+import { ChangeImageTypeAction, ImageTypeState } from '../../model/reducer/pokemonImageReducer';
+import { ChangePokemonsAction, PokemonsState } from '../../model/reducer/pokemonReducer';
 
 
 //ANCHOR - 최적화 전

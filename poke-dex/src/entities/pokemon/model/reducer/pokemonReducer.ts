@@ -1,4 +1,5 @@
-import { PokemonListResponseType } from "../../../entities/pokemon/api";
+import { PokemonListResponseType } from "../../api";
+
 
 type FetchPokemonsRequestAction = {
   type: 'FETCH_POKEMONS_REQUEST';

@@ -6,7 +6,7 @@ import { PokeMarkChip, PokeNameChip } from "../../../../shared/ui";
 import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api";
 import { Body, Footer, Header, Image, Item } from "./PokeCard.styles";
 import PokeImage from "../PokeImage";
-import { useCombinedContext, useImageState } from "../../lib/context/usePokemonsContext";
+import { useCombinedContext, useImageState } from "../../../../entities/pokemon/lib/context/usePokemonsContext";
 
 interface PokeCardProps {
   name: string
@@ -20,8 +20,8 @@ const PokeCard = (props: PokeCardProps) => {
 
   //ANCHOR - 최적화 전
   // const {imageState} = useCombinedContext();
-  const imageState = useImageState();
-  const imageType = imageState.type;
+  // const imageState = useImageState();
+  // const imageType = imageState.type;
   
   const handleClick = () => {
     navigate(`/pokemon/${props.name}`);
@@ -58,8 +58,8 @@ const PokeCard = (props: PokeCardProps) => {
         <PokeNameChip name={pokemon.koreanName} id={pokemon.id} color={pokemon.color}/>
       </Header>
       <Body>
-        <Image src={pokemon.images[imageType]} alt={pokemon.name}/>
-        {/* <PokeImage pokemon={pokemon}/> */}
+        {/* <Image src={pokemon.images[imageType]} alt={pokemon.name}/> */}
+        <PokeImage pokemon={pokemon}/>
       </Body>
       <Footer>
         <PokeMarkChip/>

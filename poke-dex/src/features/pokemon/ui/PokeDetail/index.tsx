@@ -5,7 +5,7 @@ import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
 import { Body, Container, Divider, Footer, Image, ImageContainer, Table, TableHeader, TableRow } from "./PokemonDetail.styles";
 import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api";
 import { PokeMarkChip } from "../../../../shared/ui";
-import { useCombinedContext, useImageState } from "../../lib/context/usePokemonsContext";
+import { useCombinedContext, useImageState } from "../../../../entities/pokemon/lib/context/usePokemonsContext";
 
 const PokemonDetail = () => {
   const { name } = useParams();

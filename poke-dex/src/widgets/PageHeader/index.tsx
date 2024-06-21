@@ -2,8 +2,9 @@ import { Link } from "react-router-dom";
 import { POKEMON_IMAGE_TYPE } from "../../shared/consts/PokemonImageType";
 import React, { ChangeEvent } from "react";
 import { Header, Select, Title } from './PageHeader.styles';
-import { PokemonImageKeyType } from '../../features/pokemon/model/pokemonImageReducer';
-import { useCombinedContext, useImageDispatch, useImageState } from "../../features/pokemon/lib/context/usePokemonsContext";
+
+import { useCombinedContext, useImageDispatch, useImageState } from "../../entities/pokemon/lib/context/usePokemonsContext";
+import { PokemonImageKeyType } from "../../entities/pokemon/model/reducer/pokemonImageReducer";
 
 
 const PageHeader = () => {

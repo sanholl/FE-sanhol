@@ -2,7 +2,7 @@ import PokeCard from "../PokeCard";
 import React, { useEffect } from "react";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { List, Loading } from "./PokeCardList.styles";
-import { useCombinedContext, usePokemonsState } from "../../lib/context/usePokemonsContext";
+import { useCombinedContext, usePokemonsState } from "../../../../entities/pokemon/lib/context/usePokemonsContext";
 import { useFetchPokemons } from "../../api/useFetchPokemons";
 
 const PokeCardList = () => {
