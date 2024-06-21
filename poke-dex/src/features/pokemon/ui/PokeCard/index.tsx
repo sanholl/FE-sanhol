@@ -4,8 +4,9 @@ import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
 import { PokeMarkChip, PokeNameChip } from "../../../../shared/ui";
 import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api";
-import { Body, Footer, Header, Item } from "./PokeCard.styles";
-import PokeImage from "../../../../widgets/PokeImage";
+import { Body, Footer, Header, Image, Item } from "./PokeCard.styles";
+import PokeImage from "../PokeImage";
+import { useCombinedContext, useImageState } from "../../lib/context/usePokemonsContext";
 
 interface PokeCardProps {
   name: string
@@ -16,6 +17,11 @@ const PokeCard = (props: PokeCardProps) => {
   const [ref, { entry }] = useIntersectionObserver();
   const isVisible = entry && entry.isIntersecting;
   const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);
+
+  //ANCHOR - 최적화 전
+  // const {imageState} = useCombinedContext();
+  const imageState = useImageState();
+  const imageType = imageState.type;
   
   const handleClick = () => {
     navigate(`/pokemon/${props.name}`);
@@ -52,8 +58,8 @@ const PokeCard = (props: PokeCardProps) => {
         <PokeNameChip name={pokemon.koreanName} id={pokemon.id} color={pokemon.color}/>
       </Header>
       <Body>
-        {/* <Image src={pokemon.images[imageType]} alt={pokemon.name}/> */}
-        <PokeImage pokemon={pokemon}/>
+        <Image src={pokemon.images[imageType]} alt={pokemon.name}/>
+        {/* <PokeImage pokemon={pokemon}/> */}
       </Body>
       <Footer>
         <PokeMarkChip/>
@@ -63,3 +69,4 @@ const PokeCard = (props: PokeCardProps) => {
 }
 
 export default React.memo(PokeCard);
+// export default PokeCard;

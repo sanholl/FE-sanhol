@@ -19,7 +19,7 @@ export type ChangePokemonsAction =
   | FetchPokemonsSuccessAction
   | FetchPokemonsFailureAction;
 
-export interface PokemonsState {
+export type PokemonsState = {
   pokemons: PokemonListResponseType;
   loading: boolean;
   error: string | null

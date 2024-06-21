@@ -9,8 +9,8 @@ import { useCombinedContext, useImageState } from "../../lib/context/usePokemons
 
 const PokemonDetail = () => {
   const { name } = useParams();
-  const imageState = useImageState();
   // const {imageState} = useCombinedContext();
+  const imageState = useImageState();
   const imageType = imageState.type;
   const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);
 

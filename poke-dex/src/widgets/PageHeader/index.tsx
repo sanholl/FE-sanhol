@@ -7,9 +7,9 @@ import { useCombinedContext, useImageDispatch, useImageState } from "../../featu
 
 
 const PageHeader = () => {
+  // const {imageState, imageDispatch} = useCombinedContext();
   const imageState = useImageState();
   const imageDispatch = useImageDispatch();
-  // const {imageState, imageDispatch} = useCombinedContext();
 
   const handleChange = (e:ChangeEvent<HTMLSelectElement>) => {
     imageDispatch({
@@ -31,5 +31,5 @@ const PageHeader = () => {
   );
 }
 
-export default React.memo(PageHeader);
-// export default PageHeader;
+// export default React.memo(PageHeader);
+export default PageHeader;
