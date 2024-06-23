@@ -2,15 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
-// import { useSelector } from 'react-redux';
-// import { RootState } from "../../../../entities/pokemon/model/store";
 import { Body, Container, Divider, Footer, Image, ImageContainer, Table, TableHeader, TableRow } from "./PokemonDetail.styles";
 import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api";
-import { useImageState } from "../../lib/context/useImageContext";
 import { PokeMarkChip } from "../../../../shared/ui";
+import { useCombinedContext, useImageState } from "../../../../entities/pokemon/lib/context/usePokemonsContext";
 
 const PokemonDetail = () => {
   const { name } = useParams();
+  // const {imageState} = useCombinedContext();
   const imageState = useImageState();
   const imageType = imageState.type;
   const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);
@@ -93,3 +92,4 @@ const PokemonDetail = () => {
 }
 
 export default React.memo(PokemonDetail);
+// export default PokemonDetail;

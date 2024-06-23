@@ -1,36 +1,28 @@
 import PokeCard from "../PokeCard";
-import { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import useInfiniteScroll from "react-infinite-scroll-hook";
 import { List, Loading } from "./PokeCardList.styles";
-import { PokemonListResponseType, fetchPokemonsAPI } from "../../../../entities/pokemon/api/pokemonService";
+import { useCombinedContext, usePokemonsState } from "../../../../entities/pokemon/lib/context/usePokemonsContext";
+import { useFetchPokemons } from "../../api/useFetchPokemons";
 
 const PokeCardList = () => {
-  const [pokemons, setPokemons] = useState<PokemonListResponseType>({
-    count: 0,
-    next: "",
-    results: [],
-  });
+  const fetchPokemons = useFetchPokemons();
+  // const {pokemonsState} = useCombinedContext();
+  const pokemonsState = usePokemonsState();
+  const pokemons = pokemonsState.pokemons;
 
   const [infiniteref] = useInfiniteScroll({
     loading: false,
     hasNextPage: pokemons.next !== "",
-    onLoadMore: async () => {
-      const morePokemons = await fetchPokemonsAPI(pokemons.next);
-
-      setPokemons({
-        ...morePokemons,
-        results: [...pokemons.results, ...morePokemons.results]
-      })
+    onLoadMore: () => {
+      fetchPokemons(pokemons.next);
     },
     disabled: false,
     rootMargin: "0px 0px 400px 0px",
   });
 
   useEffect(() => {
-    (async () => {
-      const result = await fetchPokemonsAPI();
-      setPokemons(result);
-    })();
+    fetchPokemons();
   }, []);
 
   return (
@@ -52,4 +44,5 @@ const PokeCardList = () => {
   );
 };
 
-export default PokeCardList;
+export default React.memo(PokeCardList);
+// export default PokeCardList;

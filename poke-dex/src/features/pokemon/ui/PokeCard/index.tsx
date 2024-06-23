@@ -2,13 +2,11 @@ import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { PokeImageSkeletone } from "../../../../shared/ui/Icon/Icon";
 import { useIntersectionObserver } from 'react-intersection-observer-hook';
-import { useSelector } from 'react-redux';
-import { RootState, useAppDispatch } from "../../../../entities/pokemon/model/store";
-import { Body, Footer, Header, Image, Item } from "./PokeCard.styles";
-// import { fetchPokemonDetail } from "../../../../entities/pokemon/model/store/pokemonDetailSlice";
-import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api";
-import { useImageState } from "../../lib/context/useImageContext";
 import { PokeMarkChip, PokeNameChip } from "../../../../shared/ui";
+import { PokemonDetailType, fetchPokemonDetailAPI } from "../../../../entities/pokemon/api";
+import { Body, Footer, Header, Image, Item } from "./PokeCard.styles";
+import PokeImage from "../PokeImage";
+import { useCombinedContext, useImageState } from "../../../../entities/pokemon/lib/context/usePokemonsContext";
 
 interface PokeCardProps {
   name: string
@@ -16,15 +14,14 @@ interface PokeCardProps {
 
 const PokeCard = (props: PokeCardProps) => {
   let navigate = useNavigate();
-  // const dispatch = useAppDispatch();
-  // const imageType = useSelector((state: RootState) => state.imageType.type);
-  const imageState = useImageState();
-  const imageType = imageState.type;
-  // const { pokemonDetails } = useSelector((state: RootState) => state.pokemonDetail);
   const [ref, { entry }] = useIntersectionObserver();
   const isVisible = entry && entry.isIntersecting;
   const [pokemon, setPokemon] = useState<PokemonDetailType | null>(null);
-  // const pokemon = pokemonDetails[props.name];
+
+  //ANCHOR - 최적화 전
+  // const {imageState} = useCombinedContext();
+  // const imageState = useImageState();
+  // const imageType = imageState.type;
   
   const handleClick = () => {
     navigate(`/pokemon/${props.name}`);
@@ -33,7 +30,6 @@ const PokeCard = (props: PokeCardProps) => {
   useEffect(() => {
     if(!isVisible) return;
     
-    // dispatch(fetchPokemonDetail(props.name))
     (async () => {
       const detail = await fetchPokemonDetailAPI(props.name);
       setPokemon(detail);
@@ -62,7 +58,8 @@ const PokeCard = (props: PokeCardProps) => {
         <PokeNameChip name={pokemon.koreanName} id={pokemon.id} color={pokemon.color}/>
       </Header>
       <Body>
-        <Image src={pokemon.images[imageType]} alt={pokemon.name}/>
+        {/* <Image src={pokemon.images[imageType]} alt={pokemon.name}/> */}
+        <PokeImage pokemon={pokemon}/>
       </Body>
       <Footer>
         <PokeMarkChip/>
@@ -72,3 +69,4 @@ const PokeCard = (props: PokeCardProps) => {
 }
 
 export default React.memo(PokeCard);
+// export default PokeCard;

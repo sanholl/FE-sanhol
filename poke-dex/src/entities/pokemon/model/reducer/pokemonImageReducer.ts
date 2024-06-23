@@ -1,4 +1,5 @@
-import { POKEMON_IMAGE_TYPE } from "../../../shared/consts"
+import { POKEMON_IMAGE_TYPE } from "../../../../shared/consts";
+
 
 
 export type PokemonImageKeyType = typeof POKEMON_IMAGE_TYPE[keyof typeof POKEMON_IMAGE_TYPE]
@@ -22,9 +23,9 @@ const initialState: ImageTypeState = {
 export const pokemonImageReducer = (state: ImageTypeState = initialState, action: ImageTypeAction) => {
   switch (action.type) {
     case 'imageType':
-    return {
-      type: action.payload
-    }
+      return {
+        type: action.payload
+      }
 
     default:
       return state
