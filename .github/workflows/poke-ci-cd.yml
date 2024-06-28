@@ -32,16 +32,16 @@ jobs:
           docker tag poke-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:latest
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:latest
 
-      - name: Install AWS EB CLI
+      - name: Install EB CLI
         run: |
-          pip install awsebcli --upgrade --user
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install awsebcli --upgrade --user
 
-      - name: Configure AWS EB CLI
+      - name: Initialize EB CLI
         run: |
-          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set default.region ${{ secrets.AWS_REGION }}
-          aws configure set default.output json
+          eb init -p docker --region ${{ secrets.AWS_REGION }}
+          eb create --profile default
 
       - name: Deploy to Elastic Beanstalk
         run: |
