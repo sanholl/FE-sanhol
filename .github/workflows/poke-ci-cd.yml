@@ -56,12 +56,15 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_APP_NAME: ${{ secrets.AWS_APP_NAME }}
         run: |
+          cd poke-dex
           eb init -p docker -r $AWS_REGION $AWS_APP_NAME
 
       - name: Set default environment for EB CLI
         run: |
+          cd poke-dex
           eb use ${{ secrets.AWS_ENV_NAME }}
 
       - name: Deploy to Elastic Beanstalk
         run: |
-          eb deploy --profile default ${{ secrets.AWS_ENV_NAME }} ./poke-dex
+          cd poke-dex
+          eb deploy --profile default ${{ secrets.AWS_ENV_NAME }}
