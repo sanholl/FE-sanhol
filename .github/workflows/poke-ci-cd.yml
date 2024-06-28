@@ -10,34 +10,18 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # GitHub 리포지토리의 코드를 체크아웃
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-
-      - name: Login to Amazon ECR
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-          AWS_ECR_REPOSITORY_NAME: ${{ secrets.AWS_ECR_REPOSITORY_NAME }}
-        run: |
-          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
-
-      - name: Build and Push Docker image
-        run: |
-          docker build -t poke-app ./poke-dex
-          docker tag poke-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:latest
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:latest
-
+      # AWS CLI를 설치
       - name: Install AWS CLI
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip
           pip3 install --upgrade awscli
 
+      # AWS CLI를 구성 (AWS 자격 증명 및 지역 설정)
       - name: Configure AWS CLI
         run: |
           aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -45,10 +29,12 @@ jobs:
           aws configure set region ${{ secrets.AWS_REGION }}
           aws configure set output json
 
+      # Elastic Beanstalk CLI를 설치
       - name: Install Elastic Beanstalk CLI
         run: |
           pip3 install --upgrade awsebcli
 
+      # Elastic Beanstalk CLI를 초기화 (애플리케이션 및 환경 설정)
       - name: Initialize EB CLI
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
@@ -59,11 +45,26 @@ jobs:
           cd poke-dex
           eb init -p docker -r $AWS_REGION $AWS_APP_NAME
 
+      # 기본 Elastic Beanstalk 환경을 설정
       - name: Set default environment for EB CLI
         run: |
           cd poke-dex
           eb use ${{ secrets.AWS_ENV_NAME }}
 
+      # Elastic Beanstalk 환경이 준비 상태가 될 때까지 대기
+      - name: Wait for environment to be ready
+        run: |
+          cd poke-dex
+          while true; do
+            STATUS=$(eb status | grep "Status" | awk '{print $2}')
+            if [ "$STATUS" == "Ready" ]; then
+              break
+            fi
+            echo "Waiting for environment to be ready..."
+            sleep 30
+          done
+
+      # Elastic Beanstalk에 애플리케이션을 배포
       - name: Deploy to Elastic Beanstalk
         run: |
           cd poke-dex
