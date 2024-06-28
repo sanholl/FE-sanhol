@@ -1,0 +1,11 @@
+{
+  "AWSEBDockerrunVersion": "1",
+  "Image": {
+    "Name": "868255717302.dkr.ecr.ap-northeast-2.amazonaws.com/sanhol:latest"
+  },
+  "Ports": [
+    {
+      "ContainerPort": 80
+    }
+  ]
+}
