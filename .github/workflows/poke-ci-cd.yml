@@ -66,6 +66,12 @@ jobs:
         run: |
           eb init -p docker -r $AWS_REGION $AWS_APP_NAME
 
+      - name: Set default environment for EB CLI
+        env:
+          AWS_ENV_NAME: ${{ secrets.AWS_ENV_NAME }}
+        run: |
+          eb use $AWS_ENV_NAME
+
       - name: Deploy to Elastic Beanstalk
         run: |
           eb deploy --profile default
