@@ -64,4 +64,4 @@ jobs:
 
       - name: Deploy to Elastic Beanstalk
         run: |
-          eb deploy --profile default
+          eb deploy --profile default --dockerrun ./poke-dex/Dockerrun.aws.json
