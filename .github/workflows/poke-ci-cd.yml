@@ -36,12 +36,11 @@ jobs:
           docker tag poke-app:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_ECR_REPOSITORY_NAME:latest
           docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_ECR_REPOSITORY_NAME:latest
 
-      - name: Install AWS CLI and Elastic Beanstalk CLI
+      - name: Install AWS CLI
         run: |
           sudo apt-get update
           sudo apt-get install -y python3-pip
           pip3 install --upgrade awscli
-          pip3 install --upgrade awsebcli
 
       - name: Configure AWS CLI
         env:
@@ -53,6 +52,10 @@ jobs:
           aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
           aws configure set region $AWS_REGION
           aws configure set output json
+
+      - name: Install Elastic Beanstalk CLI
+        run: |
+          pip3 install --upgrade awsebcli
 
       - name: Initialize EB CLI
         env:
