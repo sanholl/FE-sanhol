@@ -28,7 +28,7 @@ jobs:
 
       - name: Build and Push Docker image
         run: |
-          docker build -t poke-app ./poke-dex
+          docker build -t poke-app .
           docker tag poke-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:latest
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:latest
 
