@@ -60,7 +60,6 @@ jobs:
 
       - name: Set default environment for EB CLI
         run: |
-          cd ./poke-dex
           eb use ${{ secrets.AWS_ENV_NAME }}
 
       - name: Deploy to Elastic Beanstalk
