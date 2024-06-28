@@ -62,6 +62,6 @@ jobs:
         run: |
           eb use ${{ secrets.AWS_ENV_NAME }}
 
-      - name: Deploy to Elastic Beanstalk
+      - name: Deploy to Elastic Beanstalk using Dockerfile
         run: |
-          eb deploy --profile default --dockerrun ./poke-dex/Dockerrun.aws.json
+          eb deploy --profile default --dockerfile ./poke-dex/Dockerfile
