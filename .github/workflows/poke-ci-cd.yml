@@ -63,5 +63,5 @@ jobs:
           eb use ${{ secrets.AWS_ENV_NAME }}
 
       - name: Deploy to Elastic Beanstalk
-        run: eb deploy --profile default
+        run: eb deploy --profile default ${{ secrets.AWS_ENV_NAME }}
         working-directory: ./poke-dex
