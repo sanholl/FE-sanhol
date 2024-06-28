@@ -64,4 +64,4 @@ jobs:
 
       - name: Deploy to Elastic Beanstalk
         run: |
-          eb deploy --profile default --environment ${{ secrets.AWS_ENV_NAME }} ./poke-dex/Dockerfile
+          eb deploy --profile default ${{ secrets.AWS_ENV_NAME }} ./poke-dex/Dockerfile
