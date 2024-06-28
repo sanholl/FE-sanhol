@@ -67,4 +67,4 @@ jobs:
       - name: Deploy to Elastic Beanstalk
         run: |
           cd poke-dex
-          eb deploy --profile default ${{ secrets.AWS_ENV_NAME }}
+          eb deploy --profile default ${{ secrets.AWS_ENV_NAME }} --timeout 30
