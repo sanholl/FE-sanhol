@@ -50,6 +50,36 @@ jobs:
         run: |
           cd poke-dex
           eb use ${{ secrets.AWS_ENV_NAME }}
+          
+      # ECR 로그인
+      - name: Login to Amazon ECR
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+        run: |
+          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+
+      # ECR 리포지토리 생성 (이미 존재하면 무시)
+      - name: Create ECR repository
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
+        run: |
+          aws ecr create-repository --repository-name $AWS_ECR_REPOSITORY --region $AWS_REGION || true
+
+      # Docker 이미지를 빌드
+      - name: Build Docker image
+        run: |
+          cd poke-dex
+          docker build -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY }}:latest .
+
+      # Docker 이미지를 ECR에 푸시
+      - name: Push Docker image to ECR
+        env:
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
+        run: |
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_ECR_REPOSITORY:latest
 
       # Elastic Beanstalk 환경이 준비 상태가 될 때까지 대기
       - name: Wait for environment to be ready
