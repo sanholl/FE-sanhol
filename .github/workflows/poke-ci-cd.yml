@@ -14,6 +14,25 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      # ECR 로그인
+      - name: Login to Amazon ECR
+        run: |
+          aws ecr get-login-password --region ${{ secrets.AWS_REGION }} | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+
+      # Docker 이미지를 빌드 & Docker 이미지를 ECR에 푸시
+      - name: Build and Push Docker image
+        env:
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ECR_REPOSITORY_NAME: ${{ secrets.AWS_ECR_REPOSITORY_NAME }}
+        run: |
+          docker build -t poke-app ./poke-dex
+          docker tag poke-app:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_ECR_REPOSITORY_NAME:latest
+          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_ECR_REPOSITORY_NAME:latest
+
       # AWS CLI를 설치
       - name: Install AWS CLI
         run: |
@@ -23,10 +42,14 @@ jobs:
 
       # AWS CLI를 구성 (AWS 자격 증명 및 지역 설정)
       - name: Configure AWS CLI
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
         run: |
-          aws configure set aws_access_key_id ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws configure set aws_secret_access_key ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws configure set region ${{ secrets.AWS_REGION }}
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID
+          aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY
+          aws configure set region $AWS_REGION
           aws configure set output json
 
       # Elastic Beanstalk CLI를 설치
@@ -42,60 +65,16 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_APP_NAME: ${{ secrets.AWS_APP_NAME }}
         run: |
-          cd poke-dex
           eb init -p docker -r $AWS_REGION $AWS_APP_NAME
 
       # 기본 Elastic Beanstalk 환경을 설정
       - name: Set default environment for EB CLI
-        run: |
-          cd poke-dex
-          eb use ${{ secrets.AWS_ENV_NAME }}
-          
-      # ECR 로그인
-      - name: Login to Amazon ECR
         env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ENV_NAME: ${{ secrets.AWS_ENV_NAME }}
         run: |
-          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com
+          eb use $AWS_ENV_NAME
 
-      # ECR 리포지토리 생성 (이미 존재하면 무시)
-      - name: Create ECR repository
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
-        run: |
-          aws ecr create-repository --repository-name $AWS_ECR_REPOSITORY --region $AWS_REGION || true
-
-      # Docker 이미지를 빌드
-      - name: Build Docker image
-        run: |
-          cd poke-dex
-          docker build -t ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY }}:latest .
-
-      # Docker 이미지를 ECR에 푸시
-      - name: Push Docker image to ECR
-        env:
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
-          AWS_ECR_REPOSITORY: ${{ secrets.AWS_ECR_REPOSITORY }}
-        run: |
-          docker push $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$AWS_ECR_REPOSITORY:latest
-
-      # Elastic Beanstalk 환경이 준비 상태가 될 때까지 대기
-      - name: Wait for environment to be ready
-        run: |
-          cd poke-dex
-          while true; do
-            STATUS=$(eb status | grep "Status" | awk '{print $2}')
-            if [ "$STATUS" == "Ready" ]; then
-              break
-            fi
-            echo "Waiting for environment to be ready..."
-            sleep 30
-          done
-
-      # Elastic Beanstalk에 애플리케이션을 배포
       - name: Deploy to Elastic Beanstalk
         run: |
           cd poke-dex
-          eb deploy --profile default ${{ secrets.AWS_ENV_NAME }} --timeout 30
+          eb deploy --profile default
