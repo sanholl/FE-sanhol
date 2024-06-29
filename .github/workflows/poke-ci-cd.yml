@@ -70,10 +70,11 @@ jobs:
         env:
           AWS_ENV_NAME: ${{ secrets.AWS_ENV_NAME }}
         run: |
+          cd poke-dex
           eb use $AWS_ENV_NAME
 
       # Elastic Beanstalk에 애플리케이션 배포
       - name: Deploy to Elastic Beanstalk
         run: |
           cd poke-dex
-          eb deploy --profile default ${{ secrets.AWS_ENV_NAME }} --timeout 30
+          eb deploy --profile default
