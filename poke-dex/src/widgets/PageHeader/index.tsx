@@ -21,7 +21,7 @@ const PageHeader = () => {
   return (
     <Header>
       <Title>
-        <Link to="/">Pokémon</Link>
+        <Link to="/">Pokémon2</Link>
       </Title>
       <Select value={imageState.type} onChange={handleChange}>
         <option value={POKEMON_IMAGE_TYPE.OFFICIAL_ARTWORK}>Offical</option>
