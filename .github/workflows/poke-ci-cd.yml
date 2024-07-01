@@ -36,7 +36,7 @@ jobs:
           echo '{
             "AWSEBDockerrunVersion": "1",
             "Image": {
-              "Name": "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/sanhol:latest"
+              "Name": "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:latest"
             },
             "Ports": [
               {
@@ -44,6 +44,12 @@ jobs:
               }
             ]
           }' > ./poke-dex/Dockerrun.aws.json
+
+      - name: Install Elastic Beanstalk CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install awsebcli
 
       - name: Deploy to Elastic Beanstalk
         env:
