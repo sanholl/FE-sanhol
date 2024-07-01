@@ -62,4 +62,4 @@ jobs:
           cd ./poke-dex
           eb init -p docker -r $AWS_REGION $AWS_APP_NAME
           eb use $AWS_ENV_NAME
-          eb deploy
+          eb deploy --timeout 30
