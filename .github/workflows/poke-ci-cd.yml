@@ -25,10 +25,6 @@ jobs:
         run: |
           aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
 
-      - name: Remove existing Docker images
-        run: |
-          docker images -q ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }} | xargs -r docker rmi -f
-
       - name: Build and Push Docker image
         run: |
           docker build -t poke-app ./poke-dex
