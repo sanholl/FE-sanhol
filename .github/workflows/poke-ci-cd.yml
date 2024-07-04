@@ -56,6 +56,10 @@ jobs:
           sudo apt-get install -y python3-pip
           pip3 install awscli
 
+      - name: Install Elastic Beanstalk CLI
+        run: |
+          pip3 install awsebcli
+
       - name: Terminate existing EC2 instances
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
