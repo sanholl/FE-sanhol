@@ -1,10 +1,11 @@
+import DynamicMap from "./Map/DynamicMap";
 import KakaoMapScriptLoader from "./Map/KakaoMapScriptLoader";
 
 const App = () => {
   return (
     <>
       <KakaoMapScriptLoader>
-        지도가 생성되었음
+        <DynamicMap />
       </KakaoMapScriptLoader>
     </>
   )

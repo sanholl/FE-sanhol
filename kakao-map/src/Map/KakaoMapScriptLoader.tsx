@@ -9,7 +9,14 @@ interface KakaoMapScriptLoaderProps {
 
 const KakaoMapScriptLoader: FC<PropsWithChildren<KakaoMapScriptLoaderProps>> = ({children}) => {
   const [mapScriptLoaded, setMapScriptLoaded] = useState(false);
+  
   useEffect(() => {
+    const mapScripts = document.getElementById(KAKAO_MAP_SCRIPT_ID);
+
+    if(mapScripts && !window.kakao) {
+      return;
+    }
+    
     // <script></script>
     const script = document.createElement('script');
     script.id = KAKAO_MAP_SCRIPT_ID;
