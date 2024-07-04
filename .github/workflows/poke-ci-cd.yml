@@ -50,15 +50,17 @@ jobs:
             ]
           }' > ./poke-dex/Dockerrun.aws.json
 
-      - name: Install AWS CLI
+      - name: Install Python and virtualenv
         run: |
           sudo apt-get update
-          sudo apt-get install -y python3-pip
-          pip3 install awscli --upgrade
+          sudo apt-get install -y python3-venv
 
-      - name: Install Elastic Beanstalk CLI
+      - name: Set up virtual environment
         run: |
-          pip3 install awsebcli --upgrade
+          python3 -m venv env
+          source env/bin/activate
+          pip install --upgrade pip
+          pip install awscli awsebcli
 
       - name: Terminate existing EC2 instances
         env:
@@ -67,6 +69,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ENV_NAME: ${{ secrets.AWS_ENV_NAME }}
         run: |
+          source env/bin/activate
           INSTANCE_IDS=$(aws elasticbeanstalk describe-environment-resources --environment-name $AWS_ENV_NAME --query "EnvironmentResources.Instances[*].Id" --output text --region $AWS_REGION)
           for INSTANCE_ID in $INSTANCE_IDS; do
             aws ec2 terminate-instances --instance-ids $INSTANCE_ID --region $AWS_REGION
@@ -80,6 +83,7 @@ jobs:
           AWS_ENV_NAME: ${{ secrets.AWS_ENV_NAME }}
           AWS_APP_NAME: ${{ secrets.AWS_APP_NAME }}
         run: |
+          source env/bin/activate
           cd ./poke-dex
           if ! eb status | grep -q $AWS_ENV_NAME; then
             eb init -p docker -r $AWS_REGION $AWS_APP_NAME
