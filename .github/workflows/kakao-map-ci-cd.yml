@@ -1,0 +1,65 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # 배포할 브랜치 설정
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to Amazon ECR
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ACCOUNT_ID: ${{ secrets.AWS_ACCOUNT_ID }}
+        run: |
+          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
+
+      - name: Build and Push Docker image
+        run: |
+          docker build -t poke-app ./kakao-map
+          docker tag poke-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME2 }}:latest
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME2 }}:latest
+
+      - name: Generate Dockerrun.aws.json
+        run: |
+          echo '{
+            "AWSEBDockerrunVersion": "1",
+            "Image": {
+              "Name": "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME2 }}:latest"
+            },
+            "Ports": [
+              {
+                "ContainerPort": 80
+              }
+            ]
+          }' > ./kakao-map/Dockerrun.aws.json
+
+      - name: Install Elastic Beanstalk CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y python3-pip
+          pip3 install awsebcli
+
+      - name: Deploy to Elastic Beanstalk
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: ${{ secrets.AWS_REGION }}
+          AWS_ENV_NAME: ${{ secrets.AWS_ENV_NAME2 }}
+          AWS_APP_NAME: ${{ secrets.AWS_APP_NAME2 }}
+        run: |
+          cd ./kakao-map
+          eb init -p docker -r $AWS_REGION $AWS_APP_NAME
+          eb use $AWS_ENV_NAME
+          eb deploy --verbose --timeout 30
