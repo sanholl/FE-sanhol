@@ -7,15 +7,18 @@ import MapMarkerController from "./Map/MapMarkerController";
 
 const App = () => {
   const [places, setPlaces] = useState<PlaceType[]>([]);
+  const [selectedPlaceId, setSelectedPlaceId] = useState('');
   
   return (
     <>
       <KakaoMapScriptLoader>
         <DynamicMap>
-          <MapMarkerController places={places} />
+          <MapMarkerController places={places} selectedPlaceId={selectedPlaceId}/>
           <SearchLocation onUpdatePlaces={(places) => {
             setPlaces(places)
-          }} />
+          }} onSelect={(placeId) => {
+            setSelectedPlaceId(placeId)
+          }}/>
         </DynamicMap>
       </KakaoMapScriptLoader>
     </>
