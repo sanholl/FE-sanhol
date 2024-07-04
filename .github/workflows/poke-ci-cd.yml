@@ -25,11 +25,6 @@ jobs:
         run: |
           aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
 
-      - name: Remove existing Docker containers and images
-        run: |
-          docker ps -a -q --filter ancestor=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }} | xargs -r docker rm -f
-          docker images -q ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }} | xargs -r docker rmi -f
-
       - name: Build and Push Docker image
         run: |
           docker build -t poke-app ./poke-dex
@@ -55,18 +50,6 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y python3-pip
           pip3 install awsebcli
-
-      - name: Terminate existing EC2 instances
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: ${{ secrets.AWS_REGION }}
-          AWS_ENV_NAME: ${{ secrets.AWS_ENV_NAME }}
-        run: |
-          INSTANCE_IDS=$(aws elasticbeanstalk describe-environment-resources --environment-name $AWS_ENV_NAME --query "EnvironmentResources.Instances[*].Id" --output text --region $AWS_REGION)
-          for INSTANCE_ID in $INSTANCE_IDS; do
-            aws ec2 terminate-instances --instance-ids $INSTANCE_ID --region $AWS_REGION
-          done
 
       - name: Deploy to Elastic Beanstalk
         env:
