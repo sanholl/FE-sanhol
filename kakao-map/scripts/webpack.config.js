@@ -1,7 +1,11 @@
 const path = require('path');
 
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // 번들링이 일어날때 css 파일을 별도의 파일로 호환하겠다는 플러그인
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
+
+dotenv.config();
 
 const isProduction = process.env.NODE_ENV === 'production';
 
@@ -58,6 +62,9 @@ module.exports = {
     isProduction ? new MiniCssExtractPlugin({
       linkType: false,
       filename: '[name].[contenthash:8].css'
-    }) : undefined
+    }) : undefined,
+    new webpack.DefinePlugin({
+      'process.env': JSON.stringify(process.env)
+    })
   ].filter(Boolean)
 }

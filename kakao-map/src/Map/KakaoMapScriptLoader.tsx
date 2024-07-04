@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren, ReactNode, useEffect, useState } from "react"
 
-const KAKAO_MAP_SCRIPT_ID = 'kakao-map-script';
-const KAKAO_MAP_APP_KEY = 'cf6755d442f3a5a40e967e9bfb651ad5';
+const KAKAO_MAP_SCRIPT_ID = process.env.KAKAO_MAP_SCRIPT_ID as string;
+const KAKAO_MAP_APP_KEY = process.env.KAKAO_MAP_APP_KEY;
 
 interface KakaoMapScriptLoaderProps {
   children: ReactNode
