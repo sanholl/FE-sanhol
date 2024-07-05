@@ -1,9 +1,9 @@
 import { useState } from "react";
-import DynamicMap from "./Map/DynamicMap";
-import KakaoMapScriptLoader from "./Map/KakaoMapScriptLoader";
-import SearchLocation from "./Map/SearchLocation";
-import { PlaceType } from "./Map/mapTypes";
-import MapMarkerController from "./Map/MapMarkerController";
+import DynamicMap from "../features/map/ui/DynamicMap";
+import KakaoMapScriptLoader from "../features/map/ui/KakaoMapScriptLoader";
+import SearchLocation from "../widgets/SearchLocation";
+import { PlaceType } from "../shared/lib/types";
+import MapMarkerController from "../features/map/ui/MapMarkerController";
 
 const App = () => {
   const [places, setPlaces] = useState<PlaceType[]>([]);

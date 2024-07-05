@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # 배포할 브랜치 설정
+      - kakao-map
 
 jobs:
   build:
@@ -27,8 +27,8 @@ jobs:
 
       - name: Build and Push Docker image
         run: |
-          docker build -t poke-app ./kakao-map
-          docker tag poke-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME2 }}:latest
+          docker build -t kakao-map-app ./kakao-map
+          docker tag kakao-map-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME2 }}:latest
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME2 }}:latest
 
       - name: Generate Dockerrun.aws.json

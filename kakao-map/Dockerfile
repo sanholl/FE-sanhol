@@ -8,12 +8,17 @@ WORKDIR /app
 COPY package*.json ./
 
 # 4. 의존성 설치
+RUN rm -rf node_modules
+RUN rm package-lock.json
+RUN npm cache clear --force
 RUN npm install
 
 # 5. 소스 코드를 작업 디렉토리로 복사
 COPY . .
 
 # 6. 애플리케이션 빌드
+# npm의 bin 경로를 PATH에 추가하여 webpack을 찾을 수 있도록 함
+ENV PATH /app/node_modules/.bin:$PATH
 RUN npm run build
 
 # 7. 정적 파일을 제공하는 서버로 이동
