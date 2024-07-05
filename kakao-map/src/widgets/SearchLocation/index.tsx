@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { useMap } from "../entities/map/lib/context/useMap";
-import { PlaceType } from "./mapTypes";
+import { PlaceType } from "../../shared/lib/types";
+import { useMap } from "../../entities/map/lib/context/useMap";
 
 
 interface SearchLocationProps {
