@@ -62,4 +62,4 @@ jobs:
           cd ./kakao-map
           eb init -p docker -r $AWS_REGION $AWS_APP_NAME
           eb use $AWS_ENV_NAME
-          eb deploy --verbose --timeout 30
+          eb deploy --timeout 30
