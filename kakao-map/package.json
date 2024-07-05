@@ -4,8 +4,8 @@
   "description": "카카오맵 지도 검색",
   "main": "index.js",
   "scripts": {
-    "start": "set NODE_ENV=development&& webpack serve --config ./scripts/webpack.config.js --progress --mode development",
-    "build": "set NODE_ENV=production&& webpack --config ./scripts/webpack.config.js --progress --mode production",
+    "start": "cross-env NODE_ENV=development webpack serve --config ./scripts/webpack.config.js --progress --mode development",
+    "build": "cross-env NODE_ENV=production webpack --config ./scripts/webpack.config.js --progress --mode production",
     "tsc": "tsc"
   },
   "author": "sanhol",
@@ -34,6 +34,7 @@
     "typescript": "^5.5.3",
     "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "webpack-dev-server": "^5.0.4",
+    "cross-env": "^7.0.3"
   }
 }
