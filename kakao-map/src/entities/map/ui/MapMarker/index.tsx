@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
-import { PlaceType } from "../../../shared/lib/types";
+import { PlaceType } from '../../../../shared/lib/types'; 
 import { useMap } from "../../lib/context/useMap";
 import styled from '@emotion/styled';
 import { Address, Message, Title } from './MapMarker.styles';

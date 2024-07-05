@@ -1,7 +1,8 @@
 import { useEffect } from "react";
-import { useMap } from "../../../../entities/lib/context/useMap";
-import MapMarker from "../../../../entities/ui/MapMarker";
+
 import { PlaceType } from "../../../../shared/lib/types";
+import { useMap } from "../../../../entities/map/lib/context/useMap";
+import MapMarker from "../../../../entities/map/ui/MapMarker";
 
 interface MapMarkerControllerProps {
   places: PlaceType[]

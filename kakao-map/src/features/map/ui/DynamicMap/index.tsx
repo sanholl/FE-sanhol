@@ -1,5 +1,5 @@
 import { Children, FC, PropsWithChildren, ReactNode, useEffect, useRef, useState } from "react";
-import { KakaoMapContext } from "../../../../entities/lib/context/useMap";
+import { KakaoMapContext } from "../../../../entities/map/lib/context/useMap";
 import { Container, Map } from "./DynamicMap.styles";
 
 interface DynamicMapProps {
