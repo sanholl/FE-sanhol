@@ -8,9 +8,6 @@ WORKDIR /app
 COPY package*.json ./
 
 # 4. 의존성 설치
-RUN rm -rf node_modules
-RUN rm package-lock.json
-RUN npm cache clear --force
 RUN npm install
 
 # 5. 소스 코드를 작업 디렉토리로 복사
