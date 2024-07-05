@@ -14,7 +14,8 @@ RUN npm install
 COPY . .
 
 # 6. 애플리케이션 빌드
-RUN sudo npm run build
+RUN npm rebuild
+RUN npm run build
 
 # 7. 정적 파일을 제공하는 서버로 이동
 FROM nginx:alpine
