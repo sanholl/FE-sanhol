@@ -1,9 +1,8 @@
 import ReactDOM from 'react-dom';
 import { useEffect, useLayoutEffect, useMemo, useRef } from "react";
-import { PlaceType } from "../../../shared/lib/types";
-import { useMap } from "../../lib/context/useMap";
+import { PlaceType } from './mapTypes';
+import { useMap } from "../hooks/useMap";
 import styled from '@emotion/styled';
-import { Address, Message, Title } from './MapMarker.styles';
 
 interface MapMarkerProps {
   place: PlaceType
@@ -91,6 +90,29 @@ const MapMarker = (props:MapMarkerProps) => {
   )
 }
 
+const Title = styled.label`
+  font-weight: bold;
+  padding: 6px 8px;
+`;
 
+const Address = styled.span`
+  font-size: 12px;
+  padding: 0 6px 6px;
+`;
+
+const Message = styled.section`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: 180px;
+  min-height: 50px;
+  margin-left: -90px;
+  border-radius: 16px;
+
+
+  background-color: rgba(255, 228, 196, 0.9);
+`;
 
 export default MapMarker;

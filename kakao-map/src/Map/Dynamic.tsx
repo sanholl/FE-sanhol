@@ -1,6 +1,6 @@
 import { Children, FC, PropsWithChildren, ReactNode, useEffect, useRef, useState } from "react";
-import { KakaoMapContext } from "../../../../entities/lib/context/useMap";
-import { Container, Map } from "./DynamicMap.styles";
+import styled from "@emotion/styled";
+import { KakaoMapContext } from "../hooks/useMap";
 
 interface DynamicMapProps {
   children: ReactNode
@@ -42,5 +42,19 @@ const DynamicMap: FC<PropsWithChildren<DynamicMapProps>> = ({children}) => {
     </>
   )
 }
+
+const Container = styled.div`
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+`;
+
+const Map = styled.div`
+  position: static;
+  width: 100%;
+  height: 100%;
+`
 
 export default DynamicMap;
