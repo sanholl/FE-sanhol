@@ -3,7 +3,7 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - main  # 배포할 브랜치 설정
+      - main
 
 jobs:
   build:
@@ -26,17 +26,23 @@ jobs:
           aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com
 
       - name: Build and Push Docker image
+        env:
+          COMMIT_HASH: ${{ github.sha }}
         run: |
-          docker build -t poke-app ./poke-dex
-          docker tag poke-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:latest
-          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:latest
+          IMAGE_TAG=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:${COMMIT_HASH}
+          docker build -t poke-app:${COMMIT_HASH} ./poke-dex
+          docker tag poke-app:${COMMIT_HASH} $IMAGE_TAG
+          docker push $IMAGE_TAG
 
       - name: Generate Dockerrun.aws.json
+        env:
+          COMMIT_HASH: ${{ github.sha }}
         run: |
+          IMAGE_TAG=${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:${COMMIT_HASH}
           echo '{
             "AWSEBDockerrunVersion": "1",
             "Image": {
-              "Name": "${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.ap-northeast-2.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME }}:latest"
+              "Name": "'"$IMAGE_TAG"'"
             },
             "Ports": [
               {
@@ -58,6 +64,7 @@ jobs:
           AWS_REGION: ${{ secrets.AWS_REGION }}
           AWS_ENV_NAME: ${{ secrets.AWS_ENV_NAME }}
           AWS_APP_NAME: ${{ secrets.AWS_APP_NAME }}
+          COMMIT_HASH: ${{ github.sha }}
         run: |
           cd ./poke-dex
           if ! eb status | grep -q $AWS_ENV_NAME; then
