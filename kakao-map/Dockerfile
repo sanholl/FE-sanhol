@@ -10,7 +10,6 @@ COPY package*.json ./
 # 4. 의존성 설치
 RUN rm -rf node_modules
 RUN rm package-lock.json
-RUN rm  yarn.lock
 RUN npm cache clear --force
 RUN npm install
 
