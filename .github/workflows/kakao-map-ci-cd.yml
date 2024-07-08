@@ -27,7 +27,7 @@ jobs:
 
       - name: Build and Push Docker image
         run: |
-          docker build --build-arg KAKAO_MAP_SCRIPT_ID=${{ secrets.KAKAO_MAP_SCRIPT_ID }} --build-arg KAKAO_MAP_APP_KEY=${{ secrets.KAKAO_MAP_APP_KEY }} -t kakao-map-app ./kakao-map
+          docker build --build-arg KAKAO_MAP_APP_KEY=${{ secrets.KAKAO_MAP_APP_KEY }} -t kakao-map-app ./kakao-map
           docker tag kakao-map-app:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME2 }}:latest
           docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/${{ secrets.AWS_ECR_REPOSITORY_NAME2 }}:latest
 
