@@ -1,6 +1,6 @@
 import { FC, PropsWithChildren, ReactNode, useEffect, useState } from "react"
 
-const KAKAO_MAP_APP_KEY = process.env.KAKAO_MAP_APP_KEY;
+const KAKAO_MAP_APP_KEY = process.env.AWS_KAKAO_MAP_APP_KEY;
 
 interface KakaoMapScriptLoaderProps {
   children: ReactNode

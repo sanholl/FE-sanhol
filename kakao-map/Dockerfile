@@ -14,7 +14,6 @@ RUN npm ci
 COPY . .
 
 # 빌드 아규먼트 설정
-ARG KAKAO_MAP_SCRIPT_ID
 ARG KAKAO_MAP_APP_KEY
 
 # 환경 변수 설정
