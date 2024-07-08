@@ -13,6 +13,14 @@ RUN npm ci
 # 5. 소스 코드를 작업 디렉토리로 복사
 COPY . .
 
+# 빌드 아규먼트 설정
+ARG REACT_APP_KAKAO_MAP_SCRIPT_ID
+ARG REACT_APP_KAKAO_MAP_APP_KEY
+
+# 환경 변수 설정
+ENV REACT_APP_KAKAO_MAP_SCRIPT_ID=${REACT_APP_KAKAO_MAP_SCRIPT_ID}
+ENV REACT_APP_KAKAO_MAP_APP_KEY=${REACT_APP_KAKAO_MAP_APP_KEY}
+
 # 6. 애플리케이션 빌드
 RUN npm run build
 
@@ -20,7 +28,7 @@ RUN npm run build
 FROM nginx:alpine AS production-stage 
 
 # 8. 빌드된 정적 파일 복사 
-COPY --from=0 /app/build /usr/share/nginx/html
+COPY --from=build-stage /app/build /usr/share/nginx/html
 
 # 9. Nginx 설정 복사 (필요한 경우)
 # COPY nginx.conf /etc/nginx/nginx.conf
