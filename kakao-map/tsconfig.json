@@ -114,5 +114,5 @@
   },
   "include": [ // 위의 설정들을 "src" 하위에 적용해주겠다는 의미
     "src"
-, "src/app/App.tsx"  ]
+, "src/app/index.tsx"  ]
 }
