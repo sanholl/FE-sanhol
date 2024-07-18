@@ -3,7 +3,8 @@ import DynamicMap from "../features/map/ui/DynamicMap";
 import KakaoMapScriptLoader from "../features/map/ui/KakaoMapScriptLoader";
 import { PlaceType } from "../shared/lib/types";
 import MapMarkerController from "../features/map/ui/MapMarkerController";
-import SearchLocation from "../widgets/SearchLocation";
+// import SearchLocation from "../widgets/SearchLocation";
+import { TestButton, SearchLocation } from "trip-recommender";
 
 
 const App = () => {
@@ -20,6 +21,7 @@ const App = () => {
           }} onSelect={(placeId) => {
             setSelectedPlaceId(placeId)
           }}/>
+          <TestButton label={'Test Button'} onClick={() => console.log('Click')}/>
         </DynamicMap>
       </KakaoMapScriptLoader>
     </>
