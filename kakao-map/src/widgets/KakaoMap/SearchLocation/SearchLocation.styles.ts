@@ -1,12 +1,16 @@
 import styled from "@emotion/styled";
 
-export const Container = styled.div`
+
+export const Container = styled.div<{ isOpen: boolean }>`
   position: absolute;
   z-index: 1;
-  height: 100%;
+  height: 100vh;
   background: white;
   opacity: 0.8;
   overflow-y: auto;
+  width: 20vw;
+  transform: ${({ isOpen }) => (isOpen ? 'translateX(0)' : 'translateX(-100%)')};
+  transition: transform 0.3s ease-in-out;
 `;
 
 export const Form = styled.form`

@@ -6,7 +6,7 @@ const App = () => {
   const [places, setPlaces] = useState<PlaceType[]>([]);
   const [selectedPlaceId, setSelectedPlaceId] = useState('');
   const KAKAO_MAP_APP_KEY = import.meta.env["VITE_KAKAO_MAP_APP_KEY"];
-  
+
   return (
     <>
       <KakaoMapScriptLoader kakaoMapAppKey={KAKAO_MAP_APP_KEY}>

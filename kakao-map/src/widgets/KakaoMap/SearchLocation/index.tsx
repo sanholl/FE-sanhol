@@ -1,17 +1,18 @@
 import styled from "@emotion/styled";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { PlaceType } from "../../shared/lib/types";
-import { useMap } from "../../entities/map/lib/context/useMap";
+import { PlaceType } from "../../../shared/lib/types";
+import { useMap } from "../../../entities/map/lib/context/useMap";
 import { TestButton } from "trip-recommender";
 import { Container, Form, Input, Item, List } from "./SearchLocation.styles";
 
 
 interface SearchLocationProps {
+  isOpen: boolean,
   onUpdatePlaces: (places:PlaceType[]) => void
-  onSelect: (places:string) => void
+  onSelect: (placeId:string) => void
 }
 
-const SearchLocation = (props:SearchLocationProps) => {
+const SearchLocation = ({ isOpen, onUpdatePlaces, onSelect }:SearchLocationProps) => {
   const map = useMap();
   const [keyword, setKeyword] = useState('');
   const [places, setPlaces] = useState<PlaceType[]>([]);
@@ -52,7 +53,7 @@ const SearchLocation = (props:SearchLocationProps) => {
           }
         })
         
-        props.onUpdatePlaces(placeInfos);
+        onUpdatePlaces(placeInfos);
         setPlaces(placeInfos);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
           alert('검색 결과가 존재하지 않습니다.');
@@ -66,16 +67,17 @@ const SearchLocation = (props:SearchLocationProps) => {
   const handleItemClick = (place:PlaceType) => {
     map.setCenter(place.position);
     map.setLevel(4);
-    props.onSelect(place.id);
+    onSelect(place.id);
   }
 
 
   return (
-    <Container>
+    <Container isOpen={isOpen}>
       <Form onSubmit={handleSubmit}>
         <Input value={keyword} onChange={(e) => {
           setKeyword(e.target.value);
         }} />
+        <button>검색</button>
       </Form>
       <List>
         {
