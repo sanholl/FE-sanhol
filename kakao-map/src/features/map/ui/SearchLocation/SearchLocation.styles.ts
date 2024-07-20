@@ -1,14 +1,33 @@
 import styled from "@emotion/styled";
 
+
 export const Container = styled.div`
   position: absolute;
-  z-index: 1;
   height: 100vh;
   background: white;
   opacity: 0.8;
   overflow-y: auto;
-  width: 20vw;
-  left: 20vw;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  width: 30vw;
+  border: 1px solid #c0c0c0;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
+export const Form = styled.form`
+  display: flex;
+  position: sticky;
+  top: 0;
+`;
+
+export const Input = styled.input`
+  width: 100%;
+  min-width: 200px;
+  padding: 8px;
+  border: 1px solid #c0c0c0;
 `;
 
 export const List = styled.ul`

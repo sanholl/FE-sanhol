@@ -6,7 +6,7 @@ export const Title = styled.label`
 `;
 
 export const Address = styled.span`
-  font-size: 12px;
+  font-size: 10px;
   padding: 0 6px 6px;
 `;
 
@@ -19,8 +19,6 @@ export const Message = styled.section`
   width: 180px;
   min-height: 50px;
   margin-left: -90px;
-  border-radius: 16px;
 
-
-  background-color: rgba(255, 228, 196, 0.9);
+  background-color: white;
 `;

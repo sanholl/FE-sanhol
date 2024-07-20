@@ -1,22 +1,22 @@
 import styled from "@emotion/styled";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { PlaceType } from "../../../shared/lib/types";
-import { useMap } from "../../../entities/map/lib/context/useMap";
-import { TestButton } from "trip-recommender";
+import { PlaceType } from "../../../../shared/lib/types";
+import { useMap } from "../../../../entities/map/lib/context/useMap";
 import { Container, Form, Input, Item, List } from "./SearchLocation.styles";
+import { usePlaceDispatch } from "../../../../entities/map/lib/context/PlaceProvider";
 
 
 interface SearchLocationProps {
-  isOpen: boolean,
   onUpdatePlaces: (places:PlaceType[]) => void
   onSelect: (placeId:string) => void
 }
 
-const SearchLocation = ({ isOpen, onUpdatePlaces, onSelect }:SearchLocationProps) => {
+const SearchLocation = ({ onUpdatePlaces, onSelect }:SearchLocationProps) => {
   const map = useMap();
   const [keyword, setKeyword] = useState('');
   const [places, setPlaces] = useState<PlaceType[]>([]);
   const placeService = useRef<kakao.maps.services.Places | null>(null);
+  const placeDispatch = usePlaceDispatch();
   
   useEffect(() => { 
     if(placeService.current) {
@@ -41,7 +41,7 @@ const SearchLocation = ({ isOpen, onUpdatePlaces, onSelect }:SearchLocationProps
       return;
     }
     
-    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+    //NOTE - 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     placeService.current.keywordSearch( keyword, (data, status) => {
       if (status === kakao.maps.services.Status.OK) {
         const placeInfos = data.map(placeSearchResultItem => {
@@ -65,6 +65,10 @@ const SearchLocation = ({ isOpen, onUpdatePlaces, onSelect }:SearchLocationProps
     }); 
   }
   const handleItemClick = (place:PlaceType) => {
+    placeDispatch({
+      type: 'SET_PLACE',
+      payload: place
+    });
     map.setCenter(place.position);
     map.setLevel(4);
     onSelect(place.id);
@@ -72,12 +76,11 @@ const SearchLocation = ({ isOpen, onUpdatePlaces, onSelect }:SearchLocationProps
 
 
   return (
-    <Container isOpen={isOpen}>
+    <Container>
       <Form onSubmit={handleSubmit}>
         <Input value={keyword} onChange={(e) => {
           setKeyword(e.target.value);
         }} />
-        <button>검색</button>
       </Form>
       <List>
         {
