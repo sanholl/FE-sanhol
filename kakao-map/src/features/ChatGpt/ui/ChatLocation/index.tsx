@@ -12,7 +12,7 @@ const ChatLocation = () => {
   return (
     <Container>
       {
-        place && <ChatResponse keyword={place.address} openAiKey={OPEN_AI_KEY}/>
+        place && <ChatResponse keyword={place.title} openAiKey={OPEN_AI_KEY}/>
       }
     </Container>
   );

@@ -1,7 +1,7 @@
 {
   "name": "kakao-map",
   "version": "1.0.0",
-  "description": "카카오맵 지도 검색",
+  "description": "Trip Recommender",
   "main": "index.tsx",
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve --config ./scripts/webpack.config.js --progress --mode development",
