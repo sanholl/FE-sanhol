@@ -10,7 +10,7 @@ dotenv.config();
 const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: './src/app/app.tsx',
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
