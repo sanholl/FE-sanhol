@@ -1,0 +1,7 @@
+body {width: 100%; min-width: 1650px; height: auto; overflow-x: scroll; overflow-y: scroll; margin: 0 auto;}
+body.fix-header.min-width-none{min-width: 480px;}
+@media screen and (max-width: 1650px) {	body { overflow-x: scroll; } }
+body::-webkit-scrollbar {width: 10px;}
+body::-webkit-scrollbar-thumb {background-color: #666;}
+body::-webkit-scrollbar-track {background-color: #eee;}
+th, td, tbody {color:#333;}
