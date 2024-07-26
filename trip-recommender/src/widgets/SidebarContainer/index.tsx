@@ -4,6 +4,7 @@ import { Container, RemoveButton, ToggleButton } from "./SidebarContainer.styles
 import { PlaceType } from "../../shared/lib/types";
 import { usePlaceDispatch, usePlaceState } from "../../entities/map/lib/context/PlaceProvider";
 import ChatLocation from "../../features/ChatGpt/ui/ChatLocation";
+import { ChatResponse } from "../../features/ChatGpt/ui/ChatResponse";
 
 interface SidebarContainerProps {
   places: PlaceType[];
@@ -34,6 +35,7 @@ const SidebarContainer = ({ places, setPlaces, setSelectedPlaceId }: SidebarCont
           }}
         />
         { place && <ChatLocation /> }
+        {/* <ChatResponse /> */}
       </Container>
       <RemoveButton 
         isRecommendationOpen={!!place}

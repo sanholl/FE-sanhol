@@ -1,4 +1,6 @@
 import { ChatResponse } from "trip-recommender";
+// import { ChatResponse } from "../ChatResponse";
+
 import { usePlaceDispatch, usePlaceState } from "../../../../entities/map/lib/context/PlaceProvider";
 import { Container } from "./ChatLocation.styles";
 
