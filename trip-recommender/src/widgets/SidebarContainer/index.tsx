@@ -26,7 +26,7 @@ const SidebarContainer = ({ places, setPlaces, setSelectedPlaceId }: SidebarCont
   return (
     <>
       <Container isOpen={isSidebarOpen} isRecommendationOpen={!!place}>
-        <SearchLocation
+        {/* <SearchLocation
           onUpdatePlaces={(places) => {
             setPlaces(places);
           }}
@@ -34,8 +34,8 @@ const SidebarContainer = ({ places, setPlaces, setSelectedPlaceId }: SidebarCont
             setSelectedPlaceId(placeId);
           }}
         />
-        { place && <ChatLocation /> }
-        {/* <ChatResponse /> */}
+        { place && <ChatLocation /> } */}
+        <ChatResponse />
       </Container>
       <RemoveButton 
         isRecommendationOpen={!!place}

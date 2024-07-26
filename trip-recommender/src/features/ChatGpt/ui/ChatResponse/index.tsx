@@ -4,6 +4,7 @@ import { Container, Title, List, Message, UserMessage, LoadingMessage } from "./
 import { receiveMessageOnPort } from "worker_threads";
 
 import { dummyResponse } from './../../consts/dummyResponse';
+import { ChatLoading } from "../../../../shared/ui/ChatLoading";
 
 const recommendation = dummyResponse.recommendation;
 interface ChatResponseProps {
@@ -13,7 +14,7 @@ interface ChatResponseProps {
 
 // export const ChatResponse = ({ keyword, openAiKey }: ChatResponseProps) => {
 export const ChatResponse = () => {
-  const [isLoading, setLoading] = useState<boolean>(false);
+  const [isLoading, setLoading] = useState<boolean>(true);
   const [messages, setMessages] = useState<{ type: 'user' | 'bot' | 'loading'; content: string }[]>([]);
 
   // useEffect(() => {
@@ -58,10 +59,21 @@ export const ChatResponse = () => {
         ))} */}
         {
           isLoading
-          ? <span>Loading...</span>
-          : recommendation.map((rec, index) => (
-            <span>{rec.tripStyle}</span>
-          ))
+          ? <ChatLoading />
+          : recommendation.tripActivities.map((act, index) => {
+              const { placeType, name, description, location, link } = act;
+
+              return (
+                <Container>
+                  <div>{index+1}</div>
+                  <div>{placeType}</div>
+                  <div>{name}</div>
+                  <div>{description}</div>
+                  <div>{location}</div>
+                  <div>{link}</div>
+                </Container>
+              )
+            })
         }
       </List>
     </Container>
