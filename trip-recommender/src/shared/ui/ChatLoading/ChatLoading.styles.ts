@@ -7,6 +7,10 @@ export const Container = styled.div`
   margin: 0 auto;
 `;
 
+export const Text = styled.h3`
+  text-align: center;
+`;
+
 export const Image = styled.img.attrs(props => ({
   src: props.src,
   alt: props.alt
