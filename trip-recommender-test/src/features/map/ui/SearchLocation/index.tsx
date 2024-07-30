@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import { PlaceType } from "../../../../shared/lib/types";
 import { useMap } from "../../../../entities/map/lib/context/useMap";
-import { Container, Form, Input, Item, List } from "./SearchLocation.styles";
+import { Container, Content, Form, Input, Item, List, Title } from "./SearchLocation.styles";
 import { usePlaceDispatch } from "../../../../entities/map/lib/context/PlaceProvider";
 
 
@@ -87,8 +87,8 @@ const SearchLocation = ({ onUpdatePlaces, onSelect }:SearchLocationProps) => {
           places.map((item, index) => {
             return (
               <Item key={item.id} onClick={() => handleItemClick(item)}>
-                <label>{`${index + 1}. ${item.title}`}</label>
-                <span>{item.address}</span>
+                <Title>{`${item.title}`}</Title>
+                <Content>{item.address}</Content>
               </Item>
             )
           })

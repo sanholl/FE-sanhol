@@ -18,7 +18,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "styled-components": "^6.1.12",
-    "trip-recommender": "file:../../trip-recommender"
+    "trip-recommender": "^1.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",

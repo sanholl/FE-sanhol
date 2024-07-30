@@ -9,7 +9,7 @@ export const Container = styled.div`
   overflow-y: auto;
   -ms-overflow-style: none;
   scrollbar-width: none;
-  width: 30vw;
+  width: 20vw;
   border: 1px solid #c0c0c0;
 
   &::-webkit-scrollbar {
@@ -48,4 +48,13 @@ export const Item = styled.li`
     opacity: 1;
     transition: background-color 0s;
   }
+`;
+
+export const Title = styled.div`
+  font-weight: bold;
+`;
+
+export const Content = styled.div`
+  color: gray;
+  font-size: 12px;
 `;
