@@ -14,3 +14,24 @@ export const Container = styled.div`
     display: none;
   }
 `;
+
+export const InnerContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+export const SaveButton = styled.button`
+  padding: 10px 15px;
+  border-radius: 10px;
+  background: #0385ff;
+  color: white;
+  border: none;
+  min-width: 70%;
+  cursor: pointer;
+  justify-content: center;
+  display: flex;
+
+  &:hover {
+    background: #a0c080;
+  }
+`;
