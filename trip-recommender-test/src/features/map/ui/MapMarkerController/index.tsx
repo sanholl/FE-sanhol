@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 
-import { PlaceType } from "../../../../shared/lib/types";
+import { PlaceType } from "../../../../../@types/types";
 import { useMap } from "../../../../entities/map/lib/context/useMap";
 import MapMarker from "../../../../entities/map/ui/MapMarker";
 

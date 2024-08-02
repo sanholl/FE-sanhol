@@ -1,4 +1,4 @@
-import { PlaceType } from "../../../../shared/lib/types";
+import { PlaceType } from "../../../../../@types/types";
 
 export type PlaceState = {
   selectedPlace: PlaceType | null;

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
-import { FormEvent, useEffect, useRef, useState } from "react";
-import { PlaceType } from "../../../../shared/lib/types";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
+import { PlaceType } from "../../../../../@types/types";
 import { useMap } from "../../../../entities/map/lib/context/useMap";
 import { Container, Content, Form, Input, Item, List, Title } from "./SearchLocation.styles";
 import { usePlaceDispatch } from "../../../../entities/map/lib/context/PlaceProvider";

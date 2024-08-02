@@ -1,7 +1,7 @@
 {
   "presets": [
-    "@babel/env",
-    ["@babel/preset-react", { "runtime": "automatic" }],
+    "next/babel",
+    "@babel/preset-react",
     "@babel/preset-typescript"
   ]
 }

@@ -1,7 +1,7 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import SearchLocation from "../../features/map/ui/SearchLocation";
 import { Container, RemoveButton, ToggleButton } from "./SidebarContainer.styles";
-import { PlaceType } from "../../shared/lib/types";
+import { PlaceType } from "../../../@types/types";
 import { usePlaceDispatch, usePlaceState } from "../../entities/map/lib/context/PlaceProvider";
 import ChatLocation from "../../features/ChatGpt/ui/ChatLocation";
 

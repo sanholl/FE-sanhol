@@ -4,7 +4,7 @@ import KakaoMapScriptLoader from '../features/map/ui/KakaoMapScriptLoader';
 import DynamicMap from '../features/map/ui/DynamicMap';
 import MapMarkerController from '../features/map/ui/MapMarkerController';
 import SearchLocation from '../features/map/ui/SearchLocation';
-import { PlaceType } from '../shared/lib/types';
+import { PlaceType } from '../../@types/types';
 import SidebarContainer from '../widgets/SidebarContainer';
 import { PlaceProvider } from '../entities/map/lib/context/PlaceProvider';
 
