@@ -1,19 +1,22 @@
 import styled from "@emotion/styled";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { PlaceType } from "../../shared/lib/types";
-import { useMap } from "../../entities/map/lib/context/useMap";
+import { PlaceType } from "../../../../shared/lib/types";
+import { useMap } from "../../../../entities/map/lib/context/useMap";
+import { Container, Form, Input, Item, List } from "./SearchLocation.styles";
+import { usePlaceDispatch } from "../../../../entities/map/lib/context/PlaceProvider";
 
 
 interface SearchLocationProps {
   onUpdatePlaces: (places:PlaceType[]) => void
-  onSelect: (places:string) => void
+  onSelect: (placeId:string) => void
 }
 
-const SearchLocation = (props:SearchLocationProps) => {
+const SearchLocation = ({ onUpdatePlaces, onSelect }:SearchLocationProps) => {
   const map = useMap();
   const [keyword, setKeyword] = useState('');
   const [places, setPlaces] = useState<PlaceType[]>([]);
   const placeService = useRef<kakao.maps.services.Places | null>(null);
+  const placeDispatch = usePlaceDispatch();
   
   useEffect(() => { 
     if(placeService.current) {
@@ -38,7 +41,7 @@ const SearchLocation = (props:SearchLocationProps) => {
       return;
     }
     
-    // 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
+    //NOTE - 장소검색 객체를 통해 키워드로 장소검색을 요청합니다
     placeService.current.keywordSearch( keyword, (data, status) => {
       if (status === kakao.maps.services.Status.OK) {
         const placeInfos = data.map(placeSearchResultItem => {
@@ -50,7 +53,7 @@ const SearchLocation = (props:SearchLocationProps) => {
           }
         })
         
-        props.onUpdatePlaces(placeInfos);
+        onUpdatePlaces(placeInfos);
         setPlaces(placeInfos);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
           alert('검색 결과가 존재하지 않습니다.');
@@ -62,9 +65,13 @@ const SearchLocation = (props:SearchLocationProps) => {
     }); 
   }
   const handleItemClick = (place:PlaceType) => {
+    placeDispatch({
+      type: 'SET_PLACE',
+      payload: place
+    });
     map.setCenter(place.position);
     map.setLevel(4);
-    props.onSelect(place.id);
+    onSelect(place.id);
   }
 
 
@@ -90,47 +97,5 @@ const SearchLocation = (props:SearchLocationProps) => {
     </Container>
   );
 }
-
-const Container = styled.div`
-  position: absolute;
-  z-index: 1;
-  height: 100%;
-  background: white;
-  opacity: 0.8;
-  overflow-y: auto;
-`;
-
-const Form = styled.form`
-  display: flex;
-  position: sticky;
-  top: 0;
-`;
-
-const Input = styled.input`
-  width: 100%;
-  min-width: 200px;
-  padding: 8px;
-  border: 1px solid #c0c0c0;
-`;
-
-const List = styled.ul`
-  list-style: none;
-  margin: 0;
-  padding: 0;
-`
-
-const Item = styled.li`
-  display: flex;
-  flex-direction: column;
-  padding: 8px;
-  border-bottom: 1px dashed #d2d2d2;
-  cursor: pointer;
-
-  &:hover {
-    background-color: #d2d2d2;
-    opacity: 1;
-    transition: background-color 0s;
-  }
-`;
 
 export default SearchLocation;

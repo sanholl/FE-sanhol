@@ -1,6 +1,5 @@
 import { FC, PropsWithChildren, ReactNode, useEffect, useState } from "react"
 
-const KAKAO_MAP_SCRIPT_ID = process.env.KAKAO_MAP_SCRIPT_ID as string;
 const KAKAO_MAP_APP_KEY = process.env.KAKAO_MAP_APP_KEY;
 
 interface KakaoMapScriptLoaderProps {
@@ -11,7 +10,7 @@ const KakaoMapScriptLoader: FC<PropsWithChildren<KakaoMapScriptLoaderProps>> = (
   const [mapScriptLoaded, setMapScriptLoaded] = useState(false);
   
   useEffect(() => {
-    const mapScripts = document.getElementById(KAKAO_MAP_SCRIPT_ID);
+    const mapScripts = document.getElementById('kakao-map-script');
 
     if(mapScripts && !window.kakao) {
       return;
@@ -19,7 +18,7 @@ const KakaoMapScriptLoader: FC<PropsWithChildren<KakaoMapScriptLoaderProps>> = (
     
     // <script></script>
     const script = document.createElement('script');
-    script.id = KAKAO_MAP_SCRIPT_ID;
+    script.id = 'kakao-map-script';
     script.src = `https://dapi.kakao.com/v2/maps/sdk.js?appkey=${KAKAO_MAP_APP_KEY}&libraries=services&autoload=false`;
     script.onload = () => {
       window.kakao.maps.load(() => {

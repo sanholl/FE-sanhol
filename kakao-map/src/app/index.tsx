@@ -1,29 +1,8 @@
-import { useState } from "react";
-import DynamicMap from "../features/map/ui/DynamicMap";
-import KakaoMapScriptLoader from "../features/map/ui/KakaoMapScriptLoader";
-import { PlaceType } from "../shared/lib/types";
-import MapMarkerController from "../features/map/ui/MapMarkerController";
-import SearchLocation from "../widgets/SearchLocation";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './app';
+import './index.css';
 
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 
-const App = () => {
-  const [places, setPlaces] = useState<PlaceType[]>([]);
-  const [selectedPlaceId, setSelectedPlaceId] = useState('');
-  
-  return (
-    <>
-      <KakaoMapScriptLoader>
-        <DynamicMap>
-          <MapMarkerController places={places} selectedPlaceId={selectedPlaceId}/>
-          <SearchLocation onUpdatePlaces={(places) => {
-            setPlaces(places)
-          }} onSelect={(placeId) => {
-            setSelectedPlaceId(placeId)
-          }}/>
-        </DynamicMap>
-      </KakaoMapScriptLoader>
-    </>
-  )
-}
-
-export default App;
+root.render(<App />);
