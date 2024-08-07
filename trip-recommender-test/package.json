@@ -4,9 +4,9 @@
   "description": "Trip Recommender",
   "main": "./src/app/index.tsx",
   "scripts": {
-    "start": "cross-env NODE_ENV=development webpack serve --config ./scripts/webpack.config.js --progress --mode development",
-    "build": "cross-env NODE_ENV=production webpack --config ./scripts/webpack.config.js --progress --mode production",
-    "tsc": "tsc"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "author": "sanhol",
   "license": "ISC",
@@ -14,11 +14,12 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "dotenv": "^16.4.5",
+    "next": "^14.2.5",
     "openai": "^4.52.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "styled-components": "^6.1.12",
-    "trip-recommender": "^1.0.0"
+    "trip-recommender": "^1.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.24.7",
@@ -34,6 +35,7 @@
     "html-webpack-plugin": "^5.6.0",
     "kakao.maps.d.ts": "^0.1.40",
     "mini-css-extract-plugin": "^2.9.0",
+    "react-toastify": "^10.0.5",
     "style-loader": "^4.0.0",
     "typescript": "^5.5.3",
     "webpack": "^5.92.1",
