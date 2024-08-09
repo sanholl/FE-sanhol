@@ -31,7 +31,7 @@ const KakaoMapScriptLoader: FC<PropsWithChildren<KakaoMapScriptLoaderProps>> = (
       setMapScriptLoaded(false);
     }
 
-    document.getElementById('root')?.appendChild(script);
+    document.querySelector('main')?.appendChild(script);
   }, []);
   
   return (

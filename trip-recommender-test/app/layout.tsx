@@ -1,6 +1,7 @@
 import React from "react";
 import type { Metadata } from "next";
-import '../styles/globals.css'
+import './layout.styles.css';
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Trip Recommender",
@@ -11,37 +12,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body>
-        <div className="gnb">
-          <nav>
-            <ul>
-              <li>
-                <a href="/">Home</a>
-              </li>
-              <li>
-                <a href="/about">About</a>
-              </li>
-              <li>
-                <a href="/contact">Contact</a>
-              </li>
-            </ul>
-          </nav>
-        </div>
         <div className="lnb">
-          <nav>
-            <ul>
-              <li>
-                <a href="/section1">Section 1</a>
-              </li>
-              <li>
-                <a href="/section2">Section 2</a>
-              </li>
-              <li>
-                <a href="/section3">Section 3</a>
-              </li>
-            </ul>
-          </nav>
+          <Link href="/home">HOME</Link>
+          <Link href="/search">Search</Link>
+          <Link href="/my-trip">My Trip</Link>
+          <Link href="/login">LOGIN</Link>
         </div>
-        <main id="root">{children}</main>
+        <main>{children}</main>
       </body>
     </html>
   );

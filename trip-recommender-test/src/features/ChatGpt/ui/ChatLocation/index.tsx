@@ -5,7 +5,7 @@ import { Container, InnerContainer, SaveButton } from "./ChatLocation.styles";
 import { usePlaceState } from "../../../../entities/map/lib/context/PlaceProvider";
 import { ChatResponse, SelectList } from "trip-recommender";
 import { FaDownload } from "react-icons/fa";
-import { createRecommendation } from "supabase/api/recommendatinApi";
+import { createRecommendation } from "supabase/api/recommendationApi";
 
 const OPEN_AI_KEY = process.env.NEXT_PUBLIC_OPEN_AI_KEY as string;
 

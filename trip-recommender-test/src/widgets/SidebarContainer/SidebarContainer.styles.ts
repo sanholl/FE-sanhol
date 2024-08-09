@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 
 export const Container = styled.div<{ isOpen: boolean; isRecommendationOpen: boolean }>`
-  position: fixed;
+  position: absolute;
   top: 0;
-  left: ${({ isOpen }) => (isOpen ? '0' : '-50vw')};
+  left: ${({ isOpen }) => (isOpen ? '5vw' : '-50vw')};
   width: ${({ isRecommendationOpen }) => (isRecommendationOpen ? '50vw' : '20vw')};
   height: 100%;
   background: white;
@@ -20,7 +20,7 @@ export const Container = styled.div<{ isOpen: boolean; isRecommendationOpen: boo
 
 export const ToggleButton = styled.button<{ isOpen: boolean; isRecommendationOpen: boolean }>`
   position: absolute;
-  left: ${({ isOpen, isRecommendationOpen }) => (isOpen ? (isRecommendationOpen ? '50vw' : '20vw') : '0')};
+  left: ${({ isOpen, isRecommendationOpen }) => (isOpen ? (isRecommendationOpen ? '55vw' : '25vw') : '5vw')};
   top: 50%;
   z-index: 2;
   transition: left 0.3s ease-in-out;
@@ -34,7 +34,7 @@ export const ToggleButton = styled.button<{ isOpen: boolean; isRecommendationOpe
 
 export const RemoveButton = styled.button<{ isRecommendationOpen: boolean; isOpen: boolean }>`
   display: ${({ isRecommendationOpen, isOpen }) => ( isRecommendationOpen && isOpen ? 'flex': 'none' )};
-  left: ${({ isOpen, isRecommendationOpen }) => (isOpen && isRecommendationOpen ? '50vw' : '-50vw')};
+  left: ${({ isOpen, isRecommendationOpen }) => (isOpen && isRecommendationOpen ? '55vw' : '-55vw')};
   animation: ${({ isRecommendationOpen, isOpen }) =>
     isRecommendationOpen && isOpen ? 'slideIn 0.3s forwards' : 'slideOut 0.3s forwards'};
   position: absolute;
