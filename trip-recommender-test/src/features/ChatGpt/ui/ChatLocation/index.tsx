@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { Container, InnerContainer, SaveButton } from "./ChatLocation.styles";
-import { usePlaceState } from "../../../../entities/map/lib/context/PlaceProvider";
+import { usePlaceState } from "../../../../entities/map/lib/context/PlaceAndMyTripProvider";
 import { ChatResponse, SelectList } from "trip-recommender";
 import { FaDownload } from "react-icons/fa";
 import { createRecommendation } from "supabase/api/recommendationApi";
@@ -29,7 +29,7 @@ const ChatLocation = () => {
   };
   const handleSave = async () => {
     try {
-      await createRecommendation(response);
+      place && await createRecommendation(response, place.title);
       setIsSaved(true);
       toast.success("일정이 성공적으로 저장되었습니다!");
     } catch (error) {

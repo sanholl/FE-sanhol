@@ -2,8 +2,8 @@ import styled from "@emotion/styled";
 import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { PlaceType } from "../../../../../@types/types";
 import { useMap } from "../../../../entities/map/lib/context/useMap";
-import { Container, Content, Form, Input, Item, List, Title } from "./SearchLocation.styles";
-import { usePlaceDispatch } from "../../../../entities/map/lib/context/PlaceProvider";
+import { Container, Content, Form, Input, Item, List, Title } from "../../../../shared/ui/styles/SearchAndList.styles";
+import { usePlaceDispatch } from "../../../../entities/map/lib/context/PlaceAndMyTripProvider";
 
 
 interface SearchLocationProps {
