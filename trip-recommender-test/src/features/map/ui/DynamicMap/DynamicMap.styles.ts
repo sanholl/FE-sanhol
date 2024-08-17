@@ -6,6 +6,7 @@ export const Container = styled.div`
   right: 0;
   top: 0;
   bottom: 0;
+  margin-left: calc(3vw + 20px);
 `;
 
 export const Map = styled.div`

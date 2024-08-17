@@ -11,22 +11,28 @@ export type Database = {
     Tables: {
       tr_recommendation: {
         Row: {
+          auth_id: number
           created_at: string
           deleted_at: string | null
           id: string
           recommendation: Json | null
+          title: string
         }
         Insert: {
+          auth_id?: number
           created_at?: string
           deleted_at?: string | null
           id?: string
           recommendation?: Json | null
+          title?: string
         }
         Update: {
+          auth_id?: number
           created_at?: string
           deleted_at?: string | null
           id?: string
           recommendation?: Json | null
+          title?: string
         }
         Relationships: []
       }

@@ -1,8 +1,7 @@
-import React, { FC, PropsWithChildren, ReactNode, useEffect, useState } from "react"
+import { SideContainer } from "@/src/shared/ui/styles/SideContainer";
+import React, { FC, PropsWithChildren, ReactNode, useEffect, useState } from "react";
 
 const KAKAO_MAP_APP_KEY = process.env.NEXT_PUBLIC_KAKAO_MAP_APP_KEY;
-
-console.log(KAKAO_MAP_APP_KEY)
 
 interface KakaoMapScriptLoaderProps {
   children: ReactNode
@@ -31,16 +30,16 @@ const KakaoMapScriptLoader: FC<PropsWithChildren<KakaoMapScriptLoaderProps>> = (
       setMapScriptLoaded(false);
     }
 
-    document.getElementById('root')?.appendChild(script);
+    document.querySelector('main')?.appendChild(script);
   }, []);
   
   return (
     <>
     {
       mapScriptLoaded ? children : (
-        <div>
-          지도를 가져오는 중입니다.
-        </div>
+        <SideContainer>
+          Loading...
+        </SideContainer>
       )
     }
     </>
